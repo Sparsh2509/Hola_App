@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
@@ -14,7 +16,7 @@ class _PasswordState extends State<Password> {
   final TextEditingController _emailController = TextEditingController();
   Text _getTextFormFieldHintText(String text) {
     return Text(text,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: whiteColor));
   }
 
   InputDecoration _getTextFormFieldInputDecoration() {

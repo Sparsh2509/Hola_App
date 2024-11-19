@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ffi';
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
-import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/signin.dart';
+import 'package:http/http.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -22,15 +23,48 @@ class _SignupState extends State<Signup> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void createSign() {
+  Future<void> createSign(String name , String password , String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
+      print("here2");
       final Sign signup = Sign(
         name: _nameController.text.trim(),
         email: _emailController.text.trim(),
         password : _passwordController.text.trim());
 
-      Navigator.pop(context, signup);
+        try{
+      
+      Response response = await post(
+        Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/signup'),
+        body: {
+          'name' : name,
+          'email' : email,
+          'password' : password,
+          'userName': name
+        }
+      );
+      print(response.statusCode);
+
+      if(response.statusCode == 201){
+        print(response.body.toString());
+        
+        // var data = jsonDecode(response.body.toString());
+        // print(data['id']);
+        print('Login successfully');
+
+      }else {
+        print('failed');
+      }
+    }catch(e){
+      print(e.toString());
+    }
+
+      // Navigator.pop(context, signup);
+    
+    }
+    else{
+      print("here");
+      
     }
   }
 
@@ -128,7 +162,8 @@ class _SignupState extends State<Signup> {
                           }
                           return null;
                         },
-                        decoration: _getTextFormFieldInputDecorationWithIcon(
+                        decoration: 
+                        _getTextFormFieldInputDecorationWithIcon(
                             Icon(Icons.person, color: iconColor)),
                       ),
                       SizedBox(height: screenHeight * 0.02),
@@ -157,9 +192,9 @@ class _SignupState extends State<Signup> {
                       ),
                       SizedBox(height: screenHeight * 0.05),
                       GestureDetector(
-                        onTap: createSign,
+                        onTap:(){ createSign(_nameController.text.toString() , _passwordController.text.toString(), _emailController.text.toString());
                           
-                        
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           width: screenWidth * 0.9,
@@ -182,12 +217,12 @@ class _SignupState extends State<Signup> {
                         height: screenHeight * 0.02,
                       ),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Divider(color: whiteColor),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
                               "Or",
                               style: TextStyle(color: whiteColor),
