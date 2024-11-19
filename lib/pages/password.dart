@@ -14,51 +14,23 @@ class Password extends StatefulWidget {
 class _PasswordState extends State<Password> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  Text _getTextFormFieldHintText(String text) {
-    return Text(text,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: whiteColor));
+  OutlineInputBorder _getOutlineInputBorder(Color color){
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(color: color),
+      );
   }
 
-  InputDecoration _getTextFormFieldInputDecoration() {
-    return InputDecoration(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(color: whiteColor),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: whiteColor),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
 
-  InputDecoration _getTextFormFieldInputDecorationWithIcon(Icon icon) {
+  InputDecoration _getTextFormFieldInputDecorationWithIcon(Icon icon,String hintText, TextStyle hintStyle) {
     return InputDecoration(
       prefix: icon,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(color: whiteColor),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: whiteColor),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      hintText: hintText,
+      hintStyle: hintStyle,
+      enabledBorder: _getOutlineInputBorder(whiteColor),
+      focusedBorder: _getOutlineInputBorder(whiteColor),
+      errorBorder: _getOutlineInputBorder(Colors.red),
+      focusedErrorBorder: _getOutlineInputBorder(Colors.red)
     );
   }
   @override
@@ -104,6 +76,7 @@ class _PasswordState extends State<Password> {
                         height: screenHeight * 0.05
                       ),
                       TextFormField(
+                         style: TextStyle(color: iconColor),
                         controller: _emailController,
                         validator: (text) {
                           if (text == null || text.isEmpty) {
@@ -112,22 +85,27 @@ class _PasswordState extends State<Password> {
                           return null;
                         },
                         decoration: _getTextFormFieldInputDecorationWithIcon(
-                            Icon(Icons.email_outlined, color: iconColor)),
+                            Icon(Icons.email_outlined, color: iconColor),"Enter email",TextStyle( fontSize: 15 , color: whiteColor)),
                       ),
                       SizedBox(
                         height: screenHeight *0.08
                       ),
-                      Container(
-                          alignment: Alignment.center,
-                          width: screenWidth * 0.9,
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: buttonColor,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: const Text("Get OTP",
-                              style:
-                                  TextStyle(fontSize: 20, color: whiteColor)),
-                        ),
+                      GestureDetector(
+                        onTap: (){
+
+                        },
+                        child: Container(
+                            alignment: Alignment.center,
+                            width: screenWidth * 0.9,
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: buttonColor,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Text("Get OTP",
+                                style:
+                                    TextStyle(fontSize: 20, color: whiteColor)),
+                          ),
+                      ),
 
                   ],
 

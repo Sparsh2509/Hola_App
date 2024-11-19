@@ -76,7 +76,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: screenHeight * 0.05),
                     
                     TextFormField(
-                      
+                       style: TextStyle(color: iconColor),
                       controller: _emailController,
                       validator: (text) {
                         if (text == null || text.isEmpty) {
@@ -89,6 +89,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     SizedBox(height: screenHeight * 0.02),
                     TextFormField(
+                       style: TextStyle(color: iconColor),
                       controller: _passwordController,
                       validator: (text) {
                         if (text == null || text.isEmpty) {
