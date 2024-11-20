@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
 import 'package:hola_app/pages/signup.dart';
 
@@ -25,17 +24,12 @@ class _SplashState extends State<Splash> {
           (Route<dynamic> route) => false);
     });
   }
+
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: Center(
-
-        
-          child: Text("Hola")
-          
-        ),
-
-      ));
+    return SafeArea(
+        child: Scaffold(
+      body: Center(child: Image.asset("assets/Splash_image.png")),
+    ));
   }
 }
