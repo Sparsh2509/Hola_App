@@ -1,9 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/email_model.dart';
-import 'package:hola_app/pages/homepage.dart';
-import 'package:hola_app/pages/password.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
 
@@ -135,7 +135,7 @@ class _EmailState extends State<Email> {
                       },
                       decoration: _getTextFormFieldInputDecorationWithIcon(
                           Icon(Icons.lock, color: iconColor),
-                          "Enter Password",
+                          "Enter OTP",
                           TextStyle(fontSize: 15, color: whiteColor)),
                     ),
                    
