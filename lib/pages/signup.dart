@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
+import 'package:hola_app/pages/emailverfiy.dart';
 import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
@@ -172,7 +173,7 @@ class _SignupState extends State<Signup> {
                          Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()),
+                                    builder: (context) => Email()),
                               ); 
                         },
                         child: Container(
