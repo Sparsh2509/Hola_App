@@ -28,7 +28,7 @@ class _ChatsState extends State<Chats> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: blackColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: whiteColor),
           onPressed: () {},

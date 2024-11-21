@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
+import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
 
@@ -22,6 +23,7 @@ class _SignupState extends State<Signup> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
 
   Future<void> createSign(String name , String password , String email) async {
     final validateStatus = _form.currentState?.validate();
@@ -167,7 +169,11 @@ class _SignupState extends State<Signup> {
                       SizedBox(height: screenHeight * 0.05),
                       GestureDetector(
                         onTap:(){ createSign(_nameController.text.toString() , _passwordController.text.toString(), _emailController.text.toString());
-                          
+                         Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()),
+                              ); 
                         },
                         child: Container(
                           alignment: Alignment.center,

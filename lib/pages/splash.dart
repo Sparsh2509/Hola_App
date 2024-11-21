@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/pages/chat.dart';
+import 'package:hola_app/pages/signup.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -20,7 +21,7 @@ class _SplashState extends State<Splash> {
   _goToMenuPage() {
     Future.delayed(const Duration(seconds: 2)).then((_) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Chats()),
+          MaterialPageRoute(builder: (context) => const Signup()),
           (Route<dynamic> route) => false);
     });
   }

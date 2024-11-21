@@ -1,22 +1,19 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/models/signin_model.dart';
-import 'package:hola_app/pages/chat.dart';
 import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/password.dart';
+import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class Email extends StatefulWidget {
+  const Email({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Email> createState() => _EmailState();
 }
 
-class _SignInState extends State<SignIn> {
+class _EmailState extends State<Email> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -237,7 +234,7 @@ class _SignInState extends State<SignIn> {
                             // Navigate to Sign In page
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Chats()),
+                              MaterialPageRoute(builder: (context) => SignIn()),
                             );
                           },
                           child: Text("Sign In",
@@ -253,3 +250,4 @@ class _SignInState extends State<SignIn> {
     ));
   }
 }
+
