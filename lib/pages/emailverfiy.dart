@@ -18,8 +18,10 @@ class _EmailState extends State<Email> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
+  
 
-  Future<void> createSign(String password, String email) async {
+
+  Future<void> createSign(String otp, String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
@@ -29,17 +31,16 @@ class _EmailState extends State<Email> {
 
       try {
         Response response = await post(
-            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/login'),
+            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/verify-email'),
             body: {
-              'email': email,
-              'password': password,
+              'otp': otp
             });
         print(response.statusCode);
 
         if (response.statusCode == 201) {
           print(response.body.toString());
 
-          print('Login successfully');
+          print('Email verifed successfully');
         } else {
           print('failed');
         }

@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_constructors
-
-
-
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
-import 'package:hola_app/pages/emailverfiy.dart';
+
 import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
@@ -24,70 +22,76 @@ class _SignupState extends State<Signup> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
 
-  Future<void> createSign(String name , String password , String email) async {
+  Future<void> createSign(String name, String password, String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
       final Sign signup = Sign(
-        name: _nameController.text.trim(),
-        email: _emailController.text.trim(),
-        password : _passwordController.text.trim());
+          name: _nameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
 
-        try{
-      
-      Response response = await post(
-        Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/signup'),
-        body: {
-          'name' : name,
-          'email' : email,
-          'password' : password,
-          'userName': name
+      try {
+        Response response = await post(
+            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/signup'),
+            body: {
+              'name': name,
+              'email': email,
+              'password': password,
+              'userName': name
+            });
+        print("sign up " + response.statusCode.toString());
+        print("sign up = " + response.body.toString());
+
+        if (response.statusCode == 201) {
+          var data = jsonDecode(response.body.toString());
+          print("sign up " + data['user']['verificationToken']);
+          Response response_email = await post(
+              Uri.parse(
+                  'https://snapverse-6nqx.onrender.com/api/auth/verify-email'),
+              body: {
+                'code': data['user']['verificationToken'],
+              });
+          if (response_email.statusCode == 200) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+          // var data = jsonDecode(response.body.toString());
+          // print(data['id']);
+          print('Sign Up successfully');
+        } else {
+          print('failed');
         }
-      );
-      print(response.statusCode);
-
-      if(response.statusCode == 201){
-        print(response.body.toString());
-        
-        // var data = jsonDecode(response.body.toString());
-        // print(data['id']);
-        print('Login successfully');
-
-      }else {
-        print('failed');
+      } catch (e) {
+        print(e.toString());
       }
-    }catch(e){
-      print(e.toString());
-    }
 
       // Navigator.pop(context, signup);
-    
-    }
-    else{
+    } else {
       print("here");
-      
     }
   }
 
-  OutlineInputBorder _getOutlineInputBorder(Color color){
+  OutlineInputBorder _getOutlineInputBorder(Color color) {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(color: color),
-      );
+      borderRadius: BorderRadius.circular(10.0),
+      borderSide: BorderSide(color: color),
+    );
   }
 
-  InputDecoration _getTextFormFieldInputDecorationWithIcon(Icon icon, String hintText, TextStyle hintStyle) {
+  InputDecoration _getTextFormFieldInputDecorationWithIcon(
+      Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-      prefix: icon,
-      hintText: hintText,
-      hintStyle: hintStyle,
-      enabledBorder: _getOutlineInputBorder(whiteColor),
-      focusedBorder: _getOutlineInputBorder(whiteColor),
-      errorBorder: _getOutlineInputBorder(Colors.red),
-      focusedErrorBorder: _getOutlineInputBorder(Colors.red)
-    );
+        prefix: icon,
+        hintText: hintText,
+        hintStyle: hintStyle,
+        enabledBorder: _getOutlineInputBorder(whiteColor),
+        focusedBorder: _getOutlineInputBorder(whiteColor),
+        errorBorder: _getOutlineInputBorder(Colors.red),
+        focusedErrorBorder: _getOutlineInputBorder(Colors.red));
   }
 
   @override
@@ -137,9 +141,10 @@ class _SignupState extends State<Signup> {
                           }
                           return null;
                         },
-                        decoration: 
-                        _getTextFormFieldInputDecorationWithIcon(
-                            Icon(Icons.person, color: iconColor),"Enter name",TextStyle( fontSize: 15 , color: whiteColor)),
+                        decoration: _getTextFormFieldInputDecorationWithIcon(
+                            Icon(Icons.person, color: iconColor),
+                            "Enter name",
+                            TextStyle(fontSize: 15, color: whiteColor)),
                       ),
                       SizedBox(height: screenHeight * 0.02),
                       TextFormField(
@@ -152,7 +157,9 @@ class _SignupState extends State<Signup> {
                           return null;
                         },
                         decoration: _getTextFormFieldInputDecorationWithIcon(
-                            Icon(Icons.email_outlined, color: iconColor),"Enter email",TextStyle( fontSize: 15, color: whiteColor)),
+                            Icon(Icons.email_outlined, color: iconColor),
+                            "Enter email",
+                            TextStyle(fontSize: 15, color: whiteColor)),
                       ),
                       SizedBox(height: screenHeight * 0.02),
                       TextFormField(
@@ -165,16 +172,17 @@ class _SignupState extends State<Signup> {
                           return null;
                         },
                         decoration: _getTextFormFieldInputDecorationWithIcon(
-                            Icon(Icons.lock, color: iconColor),"Enter password",TextStyle( fontSize: 15 , color: whiteColor)),
+                            Icon(Icons.lock, color: iconColor),
+                            "Enter password",
+                            TextStyle(fontSize: 15, color: whiteColor)),
                       ),
                       SizedBox(height: screenHeight * 0.05),
                       GestureDetector(
-                        onTap:(){ createSign(_nameController.text.toString() , _passwordController.text.toString(), _emailController.text.toString());
-                         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Email()),
-                              ); 
+                        onTap: () {
+                          createSign(
+                              _nameController.text.toString(),
+                              _passwordController.text.toString(),
+                              _emailController.text.toString());
                         },
                         child: Container(
                           alignment: Alignment.center,

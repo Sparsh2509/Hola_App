@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
@@ -36,9 +38,19 @@ class _SignInState extends State<SignIn> {
               'email': email,
               'password': password,
             });
-        print(response.statusCode);
+      
+        print("login = " + response.statusCode.toString());
+        print("login = " + response.body.toString());
+
+
 
         if (response.statusCode == 201) {
+          
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+
           print(response.body.toString());
 
           print('Login successfully');
@@ -48,8 +60,6 @@ class _SignInState extends State<SignIn> {
       } catch (e) {
         print(e.toString());
       }
-
-      
     } else {
       print("here");
     }
@@ -162,11 +172,6 @@ class _SignInState extends State<SignIn> {
                       onTap: () {
                         createSign(_passwordController.text.toString(),
                             _emailController.text.toString());
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()),
-                              ); 
                       },
                       child: Container(
                         alignment: Alignment.center,
