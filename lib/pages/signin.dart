@@ -1,13 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'dart:convert';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_interpolation_to_compose_strings, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signin_model.dart';
-import 'package:hola_app/pages/chat.dart';
-import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/pages/password.dart';
 import 'package:http/http.dart';
@@ -238,7 +234,7 @@ class _SignInState extends State<SignIn> {
                             // Navigate to Sign In page
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Chats()),
+                              MaterialPageRoute(builder: (context) => SignIn()),
                             );
                           },
                           child: Text("Sign In",

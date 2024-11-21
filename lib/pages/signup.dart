@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, non_constant_identifier_names, unused_local_variable, use_build_context_synchronously
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
-
-import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
@@ -55,7 +53,10 @@ class _SignupState extends State<Signup> {
                 'code': data['user']['verificationToken'],
               });
           if (response_email.statusCode == 200) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Landing()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Landing()));
           }
           // var data = jsonDecode(response.body.toString());
           // print(data['id']);
