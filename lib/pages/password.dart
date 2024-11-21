@@ -16,7 +16,6 @@ class Password extends StatefulWidget {
 class _PasswordState extends State<Password> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
   
 
   Future<void> createSign(String email) async {
@@ -25,12 +24,12 @@ class _PasswordState extends State<Password> {
       print("here2");
       final PasswordModel signin = PasswordModel(
         email: _emailController.text.trim(),
-        otp: _otpController.text.trim()
       );
 
       try {
         Response response = await post(
-            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/forgot-password'),
+            Uri.parse(
+                'https://snapverse-6nqx.onrender.com/api/auth/forgot-password'),
             body: {
               'email': email,
             });
@@ -65,7 +64,7 @@ class _PasswordState extends State<Password> {
   InputDecoration _getTextFormFieldInputDecorationWithIcon(
       Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-        prefix: icon,
+        prefixIcon: icon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: _getOutlineInputBorder(whiteColor),
@@ -126,19 +125,6 @@ class _PasswordState extends State<Password> {
                             Icon(Icons.email_outlined, color: iconColor),
                             "Enter email",
                             TextStyle(fontSize: 15, color: whiteColor)),
-                      ),
-                                            SizedBox(height: screenHeight * 0.02),
-                      TextFormField(
-                        style: TextStyle(color: iconColor),
-                        controller: _otpController,
-                        validator: (text) {
-                          if (text == null || text.isEmpty) {
-                            return "Enter a password ";
-                          }
-                          return null;
-                        },
-                        decoration: _getTextFormFieldInputDecorationWithIcon(
-                            Icon(Icons.lock, color: iconColor),"Enter OTP",TextStyle( fontSize: 15 , color: whiteColor)),
                       ),
                       SizedBox(height: screenHeight * 0.08),
                       GestureDetector(

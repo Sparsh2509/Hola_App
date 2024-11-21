@@ -7,6 +7,7 @@ import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
 
 import 'package:hola_app/pages/homepage.dart';
+import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/pages/signin.dart';
 import 'package:http/http.dart';
 
@@ -54,10 +55,7 @@ class _SignupState extends State<Signup> {
                 'code': data['user']['verificationToken'],
               });
           if (response_email.statusCode == 200) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Landing()));
           }
           // var data = jsonDecode(response.body.toString());
           // print(data['id']);
@@ -85,7 +83,7 @@ class _SignupState extends State<Signup> {
   InputDecoration _getTextFormFieldInputDecorationWithIcon(
       Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-        prefix: icon,
+        prefixIcon: icon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: _getOutlineInputBorder(whiteColor),

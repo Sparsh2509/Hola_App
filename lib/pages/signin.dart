@@ -8,6 +8,7 @@ import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signin_model.dart';
 import 'package:hola_app/pages/chat.dart';
 import 'package:hola_app/pages/homepage.dart';
+import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/pages/password.dart';
 import 'package:http/http.dart';
 
@@ -38,18 +39,13 @@ class _SignInState extends State<SignIn> {
               'email': email,
               'password': password,
             });
-      
+
         print("login = " + response.statusCode.toString());
         print("login = " + response.body.toString());
 
-
-
-        if (response.statusCode == 201) {
-          
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
+        if (response.statusCode == 200) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => Landing()));
 
           print(response.body.toString());
 
@@ -75,7 +71,7 @@ class _SignInState extends State<SignIn> {
   InputDecoration _getTextFormFieldInputDecorationWithIcon(
       Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-        prefix: icon,
+        prefixIcon: icon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: _getOutlineInputBorder(whiteColor),
