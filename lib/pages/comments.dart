@@ -12,8 +12,7 @@ class CommentScreen extends StatelessWidget {
         title: const Text('Comments'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed:  
- () {
+          onPressed: () {
          Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (BuildContext context) => Landing()));
           },

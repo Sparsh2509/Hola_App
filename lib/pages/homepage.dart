@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/pages/comments,dart';
+import 'package:hola_app/pages/comments.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -195,10 +195,8 @@ class _HomePageState extends State<HomePage>
                     icon: const Icon(Icons.chat_bubble_outline,
                         color: Colors.white),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CommentScreen()));
+                       Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => CommentScreen()));
                     },
                   ),
                   const Text('193', style: TextStyle(color: Colors.white)),
