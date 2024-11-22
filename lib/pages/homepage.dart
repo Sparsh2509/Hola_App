@@ -1,7 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/pages/comments,dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage>
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF2A2A42),
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.white,
+        selectedItemColor: whiteColor,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -193,7 +194,12 @@ class _HomePageState extends State<HomePage>
                   IconButton(
                     icon: const Icon(Icons.chat_bubble_outline,
                         color: Colors.white),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentScreen()));
+                    },
                   ),
                   const Text('193', style: TextStyle(color: Colors.white)),
                   const SizedBox(width: 15),

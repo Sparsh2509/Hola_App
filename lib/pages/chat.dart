@@ -5,6 +5,7 @@ import 'package:hola_app/constants/chatting_list.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/dmpage.dart';
+import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/shared/chatting_card.dart';
 
 class Chats extends StatefulWidget {
@@ -31,7 +32,11 @@ class _ChatsState extends State<Chats> {
         backgroundColor: blackColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: whiteColor),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => Landing()));
+          },
+
         ),
         title: Text(
           "_Allana01",
