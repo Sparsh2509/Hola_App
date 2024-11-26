@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
@@ -122,125 +122,162 @@ class _SettingsState extends State<Settings> {
               height: screenHeight * 0.02,
             ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              
               children: [
                 Icon(Icons.bookmark_border, color: whiteColor),
-                Text(
-                  "Saved",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Saved",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
                 Align(
                     alignment: Alignment.topRight,
                     child: Icon(Icons.arrow_forward_ios_outlined,
-                        color: whiteColor)),
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              
               children: [
                 Icon(Icons.more_time, color: whiteColor),
-                Text(
-                  "Archieve",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Archive",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              
               children: [
                 Icon(Icons.access_time, color: whiteColor),
-                Text(
-                  "Time Management",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Time Management",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              
               children: [
                 Icon(Icons.stars, color: whiteColor),
-                Text(
-                  "Close Friend",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Close Friend",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              
               children: [
                 Icon(Icons.block, color: whiteColor),
-                Text(
-                  "Blocked",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Blocked",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+             
               children: [
                 Icon(Icons.lock, color: whiteColor),
-                Text(
-                  "Account Privacy",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Account Privacy",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
+            SizedBox(
+              height: screenHeight*0.01
+            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+             
               children: [
                 Icon(Icons.language, color: whiteColor),
-                Text(
-                  "Language",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Language",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
+            ),
+            SizedBox(
+              height: screenHeight*0.01
             ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+             
               children: [
                 Icon(Icons.question_mark, color: whiteColor),
-                Text(
-                  "Help",
-                  style: TextStyle(color: whiteColor, fontSize: 15),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Help",
+                    style: TextStyle(color: whiteColor, fontSize: 15),
+                  ),
                 ),
-                Container(
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(Icons.arrow_forward_ios_outlined,
-                            color: whiteColor))),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(Icons.arrow_forward_ios_outlined,
+                        color: whiteColor,size: 15,)),
               ],
             ),
-            
           ],
         ),
       ),
