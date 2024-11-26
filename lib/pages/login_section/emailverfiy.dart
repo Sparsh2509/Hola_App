@@ -1,57 +1,54 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_interpolation_to_compose_strings, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, unused_local_variable, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/models/signin_model.dart';
-import 'package:hola_app/pages/landing.dart';
-import 'package:hola_app/pages/password.dart';
+import 'package:hola_app/models/email_model.dart';
+import 'package:hola_app/pages/login_section/signin.dart';
 import 'package:http/http.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class Email extends StatefulWidget {
+  const Email({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Email> createState() => _EmailState();
 }
 
-class _SignInState extends State<SignIn> {
+class _EmailState extends State<Email> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+  
 
-  Future<void> createSign(String password, String email) async {
+
+  Future<void> createSign(String otp, String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
-      final SignInModel signIn = SignInModel(
+      final EmailModel signIn = EmailModel(
           email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
+          otp: _otpController.text.trim());
 
       try {
         Response response = await post(
-            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/login'),
+            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/verify-email'),
             body: {
-              'email': email,
-              'password': password,
+              'otp': otp
             });
+        print(response.statusCode);
 
-        print("login = " + response.statusCode.toString());
-        print("login = " + response.body.toString());
-
-        if (response.statusCode == 200) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => Landing()));
-
+        if (response.statusCode == 201) {
           print(response.body.toString());
 
-          print('Login successfully');
+          print('Email verifed successfully');
         } else {
           print('failed');
         }
       } catch (e) {
         print(e.toString());
       }
+
+      
     } else {
       print("here");
     }
@@ -67,7 +64,7 @@ class _SignInState extends State<SignIn> {
   InputDecoration _getTextFormFieldInputDecorationWithIcon(
       Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-        prefixIcon: icon,
+        prefix: icon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: _getOutlineInputBorder(whiteColor),
@@ -99,14 +96,14 @@ class _SignInState extends State<SignIn> {
                     Image.asset("assets/sign_in_image.png"),
                     SizedBox(height: screenHeight * 0.02),
                     Text(
-                      "Sign In",
+                      "Verify Email",
                       style: TextStyle(
                           color: whiteColor,
                           fontSize: 28,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Enter valid user name & password to continue",
+                      "Enter valid Email to verify",
                       style: TextStyle(
                         color: greyColor,
                         fontSize: 14,
@@ -130,40 +127,30 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: screenHeight * 0.02),
                     TextFormField(
                       style: TextStyle(color: iconColor),
-                      controller: _passwordController,
+                      controller: _otpController,
                       validator: (text) {
                         if (text == null || text.isEmpty) {
-                          return "Enter a password ";
+                          return "Enter Otp";
                         }
                         return null;
                       },
                       decoration: _getTextFormFieldInputDecorationWithIcon(
                           Icon(Icons.lock, color: iconColor),
-                          "Enter Password",
+                          "Enter OTP",
                           TextStyle(fontSize: 15, color: whiteColor)),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            // Navigate to Sign In page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Password()),
-                            );
-                          },
-                          child: Text("Forgot password?",
-                              style: TextStyle(color: iconColor)),
-                        ),
-                      ],
-                    ),
+                   
+                    
                     SizedBox(height: screenHeight * 0.08),
                     GestureDetector(
                       onTap: () {
-                        createSign(_passwordController.text.toString(),
+                        createSign(_otpController.text.toString(),
                             _emailController.text.toString());
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignIn()),
+                              ); 
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -172,7 +159,7 @@ class _SignInState extends State<SignIn> {
                         decoration: BoxDecoration(
                             color: buttonColor,
                             borderRadius: BorderRadius.circular(12)),
-                        child: const Text("Login",
+                        child: const Text("Get OTP",
                             style: TextStyle(fontSize: 20, color: whiteColor)),
                       ),
                     ),
@@ -250,3 +237,4 @@ class _SignInState extends State<SignIn> {
     ));
   }
 }
+

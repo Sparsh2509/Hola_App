@@ -6,7 +6,7 @@ import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signup_model.dart';
 import 'package:hola_app/pages/landing.dart';
-import 'package:hola_app/pages/signin.dart';
+import 'package:hola_app/pages/login_section/signin.dart';
 import 'package:http/http.dart';
 
 class Signup extends StatefulWidget {

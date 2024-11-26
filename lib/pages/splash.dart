@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:hola_app/pages/settings_page.dart';
+import 'package:hola_app/pages/settings_section/settings_page.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

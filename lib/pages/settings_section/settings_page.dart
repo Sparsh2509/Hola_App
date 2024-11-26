@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/pages/settings_section/account_center.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -84,7 +85,11 @@ class _SettingsState extends State<Settings> {
                 )),
             SizedBox(height: screenHeight * 0.02),
             GestureDetector(
-              // onTap: ,
+              onTap:(){
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AccountCenter()));
+              } ,
               child: ListTile(
                 leading: Container(
                   padding: const EdgeInsets.all(8),
