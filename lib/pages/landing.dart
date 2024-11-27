@@ -35,6 +35,35 @@ class _LandingState extends State<Landing> {
 
     }
   }
+  // SafeArea(
+  //       child: Scaffold(
+  //     body: SingleChildScrollView(
+  //       child: Container(
+  //         height: screenHeight * 0.25,
+  //         width: screenWidth,
+  //         decoration: BoxDecoration(color: Colors.red),
+  //         child: Stack(
+  //           children: [
+  //             Image.asset("assets/chat_bg_image.png",fit: BoxFit.contain,width: screenWidth,),
+  //             Positioned(
+  //               bottom: 0,
+  //               width: screenWidth/2,
+  //               child:Center(
+  //                 child: Container(
+  //                   height: screenHeight*0.05,
+  //                   decoration: BoxDecoration(
+  //                     color: Colors.green
+  //                   ),
+                    
+  //                 ),
+  //               ),
+
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   ));
   
 
   @override
