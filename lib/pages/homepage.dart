@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/pages/chat.dart';
+import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/comments.dart';
 
 class HomePage extends StatefulWidget {

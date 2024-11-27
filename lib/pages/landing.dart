@@ -4,7 +4,7 @@ import 'package:hola_app/pages/explore.dart';
 import 'package:hola_app/pages/homepage.dart';
 import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post.dart';
-import 'package:hola_app/pages/profile.dart';
+import 'package:hola_app/pages/profile_section/profile.dart';
 
 class Landing extends StatefulWidget {
   const Landing({super.key});
