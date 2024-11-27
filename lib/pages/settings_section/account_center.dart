@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/pages/settings_section/password_security.dart';
 
 class AccountCenter extends StatelessWidget {
   const AccountCenter({super.key});
@@ -73,22 +74,30 @@ class AccountCenter extends StatelessWidget {
                     height: screenHeight * 0.02,
                   ),
                   Row(
-                    children: const [
-                      Icon(Icons.lock, color: whiteColor),
-                      SizedBox(width: 10),
-                      Expanded(
+                    children: [
+                      const Icon(Icons.lock, color: whiteColor),
+                      const SizedBox(width: 10),
+                      const Expanded(
                         child: Text(
                           "Password and Security",
                           style: TextStyle(color: whiteColor, fontSize: 15),
                         ),
                       ),
-                      Align(
-                          alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: whiteColor,
-                            size: 15,
-                          )),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PasswordSecurity()));
+                        },
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: whiteColor,
+                              size: 15,
+                            )),
+                      ),
                     ],
                   ),
                   SizedBox(

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:hola_app/pages/landing.dart';
 import 'package:hola_app/pages/settings_section/settings_page.dart';
 
 class Splash extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashState extends State<Splash> {
   _goToMenuPage() {
     Future.delayed(const Duration(seconds: 2)).then((_) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Settings()),
+          MaterialPageRoute(builder: (context) => const Landing()),
           (Route<dynamic> route) => false);
     });
   }

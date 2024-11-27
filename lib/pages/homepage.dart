@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/pages/chat.dart';
 import 'package:hola_app/pages/comments.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage>
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          'hola\'',
+          'Hola\'',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,
@@ -48,8 +49,12 @@ class _HomePageState extends State<HomePage>
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () {},
+            icon: const Icon(Icons.chat_outlined, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Chats()));
+            },
           ),
         ],
       ),
@@ -81,36 +86,8 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF2A2A42),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: whiteColor,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Location',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
+
+    
     );
   }
 
