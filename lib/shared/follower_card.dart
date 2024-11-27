@@ -4,8 +4,8 @@ import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/chat.dart';
 
 // ignore: must_be_immutable
-class FollowingCard extends StatelessWidget {
-  FollowingCard({
+class FollowerCard extends StatelessWidget {
+  FollowerCard({
     required this.imageUrl,
     required this.text,
     required this.subtitle,

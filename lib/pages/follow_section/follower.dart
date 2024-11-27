@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hola_app/constants/chatting_list.dart';
 import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/constants/following_list.dart';
+import 'package:hola_app/constants/follower_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/landing.dart';
-import 'package:hola_app/shared/chatting_card.dart';
-import 'package:hola_app/shared/following_card.dart';
+import 'package:hola_app/shared/follower_card.dart';
 
-class Following extends StatefulWidget {
-  const Following({super.key});
+class Follower extends StatefulWidget {
+  const Follower({super.key});
 
   @override
-  State<Following> createState() => _FollowingState();
+  State<Follower> createState() => _FollowerState();
 }
 
-class _FollowingState extends State<Following> {
-  List<String> chatType = [
-    "All",
-    "Unread",
-    "Unreplied",
-    "Group",
-    "Close Friends"
-  ];
-  int selectedChatType = 0;
+class _FollowerState extends State<Follower> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,7 +30,7 @@ class _FollowingState extends State<Following> {
               },
             ),
             title: Text(
-              "Following",
+              "Followers",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: whiteColor,
@@ -59,10 +49,10 @@ class _FollowingState extends State<Following> {
                       // );
                     },
                     child: Row(children: [
-                      FollowingCard(
-                        imageUrl: followingList[index].imageUrl,
-                        text: followingList[index].text,
-                        subtitle: followingList[index].subtitle,
+                      FollowerCard(
+                        imageUrl: followerList[index].imageUrl,
+                        text: followerList[index].text,
+                        subtitle: followerList[index].subtitle,
                       ),
                     ]),
                   );
@@ -70,8 +60,8 @@ class _FollowingState extends State<Following> {
                 separatorBuilder: (context, index) {
                   return SizedBox(height: screenHeight * 0.0);
                 },
-                itemCount: followingList.length),
+                itemCount: followerList.length),
           )),
     );
   }
-}
+  }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/edit_profile.dart';
+import 'package:hola_app/pages/follower.dart';
 import 'package:hola_app/pages/following.dart';
 import 'package:hola_app/pages/share_profile.dart';
 
@@ -126,7 +127,7 @@ class _ProfileState extends State<Profile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ShareProfile()),
+                                  builder: (context) => Follower()),
                             );
                           },
                           child: Container(
