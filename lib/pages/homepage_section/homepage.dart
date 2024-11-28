@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/comments.dart';
+import 'package:hola_app/pages/homepage_section/notification.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,22 +32,20 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: homeAppBarColor,
+      backgroundColor: blackColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'Hola\'',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: Image.asset("assets/Splash_image.png"),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => NotificationPage()));
+
+            },
           ),
           IconButton(
             icon: const Icon(Icons.chat_outlined, color: Colors.white),
@@ -61,17 +60,30 @@ class _HomePageState extends State<HomePage>
       body: Column(
         children: [
           // Tab Bar
-          Container(
-            color: Colors.transparent,
-            child: TabBar(
-              controller: _tabController,
-              indicatorColor: Colors.white,
-              indicatorWeight: 3,
-              tabs: const [
-                Tab(text: 'All'),
-                Tab(text: 'Following'),
-              ],
-            ),
+          TabBar(
+            controller: _tabController,
+             labelColor: iconColor,
+            unselectedLabelColor: whiteColor,
+            indicatorColor:iconColor ,
+            indicatorWeight: 3,
+            indicatorSize: TabBarIndicatorSize.tab,
+            // indicatorSize: .
+            tabs: const [
+              Tab(
+                child: Text(
+                  "All",style: TextStyle(
+                    fontSize: 20
+          
+                  ),
+                ),
+              ),
+              Tab(child: Text(
+                  "Following",style: TextStyle(
+                    fontSize: 20
+          
+                  ),
+                ),),
+            ],
           ),
           // Posts List
           Expanded(

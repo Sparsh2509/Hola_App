@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/size.dart';
 
 class Explore extends StatefulWidget {
   const Explore({super.key});
@@ -50,10 +51,27 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               labelColor: iconColor,
               unselectedLabelColor: whiteColor,
               indicatorColor: iconColor,
+              indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
-                Tab(text: "Trending"),
-                Tab(text: "Community"),
+                Tab(
+                  child: Text(
+                    "Trending",style: TextStyle(
+                      fontSize: 20
+
+                    ),
+                  ),
+                ),
+                Tab(child: Text(
+                    "Community",style: TextStyle(
+                      fontSize: 20
+
+                    ),
+                  ),),
+
               ],
+            ),
+            SizedBox(
+              height: screenHeight*0.02
             ),
 
             // Tab View
