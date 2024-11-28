@@ -118,7 +118,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
 
   Widget buildCommunityView() {
     return Center(
-      child: Text("Community Content Here", style: TextStyle(fontSize: 18)),
+      child: Text("Community Content Here", style: TextStyle(fontSize: 18,color: whiteColor)),
     );
   }
 }

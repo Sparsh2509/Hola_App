@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/comments.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
@@ -36,23 +37,26 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Image.asset("assets/Splash_image.png"),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Container(
+              
+             
+              child: Image.asset("assets/Splash_image.png", fit: BoxFit.fill)),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => NotificationPage()));
-
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NotificationPage()));
             },
           ),
           IconButton(
             icon: const Icon(Icons.chat_outlined, color: Colors.white),
             onPressed: () {
               Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Chats()));
+                  context, MaterialPageRoute(builder: (context) => Chats()));
             },
           ),
         ],
@@ -62,27 +66,25 @@ class _HomePageState extends State<HomePage>
           // Tab Bar
           TabBar(
             controller: _tabController,
-             labelColor: iconColor,
+            labelColor: iconColor,
             unselectedLabelColor: whiteColor,
-            indicatorColor:iconColor ,
+            indicatorColor: iconColor,
             indicatorWeight: 3,
             indicatorSize: TabBarIndicatorSize.tab,
             // indicatorSize: .
             tabs: const [
               Tab(
                 child: Text(
-                  "All",style: TextStyle(
-                    fontSize: 20
-          
-                  ),
+                  "All",
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-              Tab(child: Text(
-                  "Following",style: TextStyle(
-                    fontSize: 20
-          
-                  ),
-                ),),
+              Tab(
+                child: Text(
+                  "Following",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ],
           ),
           // Posts List
@@ -98,8 +100,6 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       // Bottom Navigation Bar
-
-    
     );
   }
 
@@ -184,8 +184,11 @@ class _HomePageState extends State<HomePage>
                     icon: const Icon(Icons.chat_bubble_outline,
                         color: Colors.white),
                     onPressed: () {
-                       Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => CommentScreen()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CommentScreen()));
                     },
                   ),
                   const Text('193', style: TextStyle(color: Colors.white)),
