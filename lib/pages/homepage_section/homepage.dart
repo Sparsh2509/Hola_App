@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage>
                   const Text('193', style: TextStyle(color: Colors.white)),
                   const SizedBox(width: 15),
                   IconButton(
-                    icon: const Icon(Icons.share, color: Colors.white),
+                    icon: const Icon(Icons.send_sharp, color: Colors.white),
                     onPressed: () {},
                   ),
                 ],
