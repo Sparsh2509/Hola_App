@@ -1,19 +1,19 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/homepage_model.dart';
+import 'package:hola_app/pages/homepage_section/comments.dart';
 
-class HomepageCard extends StatefulWidget {
-  const HomepageCard({super.key, required this.homepageModel});
+class HomepageCard extends StatelessWidget {
+  const HomepageCard({
+    super.key,
+    required this.homepageModel,
+    required this.onValueChanged,
+  });
   final HomepageModel homepageModel;
-
-  @override
-  State<HomepageCard> createState() => _HomepageCardState();
-}
-
-class _HomepageCardState extends State<HomepageCard> {
+  final onValueChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,26 +35,25 @@ class _HomepageCardState extends State<HomepageCard> {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage(widget.homepageModel.image),
+                      backgroundImage: AssetImage(homepageModel.image),
                     ),
                     SizedBox(
                       width: screenWidth * 0.02,
                     ),
                     Expanded(
-                      child: Text(widget.homepageModel.userName,
+                      child: Text(homepageModel.userName,
                           style: TextStyle(fontSize: 20, color: whiteColor)),
                     ),
                     Icon(
-                          Icons.more_horiz,
-                          color: whiteColor,
-                        )
-                    
+                      Icons.more_horiz,
+                      color: whiteColor,
+                    )
                   ],
                 ),
                 SizedBox(
                   height: screenHeight * 0.02,
                 ),
-                Text(widget.homepageModel.caption,
+                Text(homepageModel.caption,
                     style: TextStyle(fontSize: 15, color: whiteColor)),
                 SizedBox(height: screenHeight * 0.02),
                 Container(
@@ -65,7 +64,7 @@ class _HomepageCardState extends State<HomepageCard> {
                     border: Border.all(color: iconColor),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(widget.homepageModel.imageUrl),
+                        image: AssetImage(homepageModel.imageUrl),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -75,23 +74,30 @@ class _HomepageCardState extends State<HomepageCard> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: onValueChanged,
                         icon: Icon(
-                          Icons.favorite,
-                          color: whiteColor,
+                          homepageModel.isliked
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
+                          color: homepageModel.isliked ? redColor : whiteColor,
                         )),
                     SizedBox(
                       width: screenWidth * 0.01,
                     ),
                     Text(
-                      widget.homepageModel.likes.toString(),
+                      homepageModel.likes.toString(),
                       style: TextStyle(color: whiteColor),
                     ),
                     SizedBox(
                       width: screenWidth * 0.02,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentScreen()));
+                        },
                         icon: Icon(
                           Icons.comment,
                           color: whiteColor,
@@ -100,7 +106,7 @@ class _HomepageCardState extends State<HomepageCard> {
                       width: screenWidth * 0.01,
                     ),
                     Text(
-                      widget.homepageModel.comments.toString(),
+                      homepageModel.comments.toString(),
                       style: TextStyle(color: whiteColor),
                     ),
                     SizedBox(

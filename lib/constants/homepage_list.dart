@@ -9,7 +9,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
     HomepageModel(
@@ -20,7 +20,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
     HomepageModel(
@@ -31,7 +31,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
     HomepageModel(
@@ -42,7 +42,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
     HomepageModel(
@@ -53,7 +53,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
     HomepageModel(
@@ -64,7 +64,7 @@ List<HomepageModel> homeList = [
     imageUrl: "assets/post_image.png",
     likes: 120,
     comments: 10,
-    isliked: true
+    isliked: false
 
   ),
   

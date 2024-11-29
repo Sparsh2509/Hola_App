@@ -174,7 +174,19 @@ class _HomePageState extends State<HomePage>
       itemCount: homeList.length,
       padding: const EdgeInsets.all(10),
       itemBuilder: (context, index) {
-        return HomepageCard(homepageModel: homeList[index]);
+        return HomepageCard(
+          homepageModel: homeList[index],
+          onValueChanged: () {
+            setState(() {
+              homeList[index].isliked = !homeList[index].isliked;
+              if (homeList[index].isliked) {
+                homeList[index].likes++;
+              } else {
+                homeList[index].likes--;
+              }
+            });
+          },
+        );
       },
       separatorBuilder: (context, index) {
         return SizedBox(
