@@ -69,12 +69,32 @@ class _ChatsState extends State<Chats> {
                       onTap: () {
                         setState(() {
                           selectedChatType = index;
-                        });
+                        }
+                        );
                       },
-                      child: Text(
-                        chatType[index],
-                        style: TextStyle(fontSize: 15, color: whiteColor),
-                      ),
+                      child: Column(children: [
+                            Text(chatType[index],
+                                style: TextStyle(
+                                    color: selectedChatType == index
+                                        ? iconColor
+                                        : whiteColor,
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(height: 5),
+                            selectedChatType == index
+                                ? Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                        color: iconColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                  )
+                                : Container()
+                          ])
+                      // child: Text(
+                      //   chatType[index],
+                      //   style: TextStyle(fontSize: 15, color: whiteColor),
+                      // ),
                     );
                   },
                   separatorBuilder: (context, index) {
