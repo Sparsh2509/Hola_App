@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/homepage_list.dart';
 import 'package:hola_app/constants/size.dart';
+
 import 'package:hola_app/pages/chat_section/chat.dart';
-import 'package:hola_app/pages/homepage_section/comments.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
+import 'package:hola_app/shared/homepage_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,8 +42,6 @@ class _HomePageState extends State<HomePage>
         leading: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Container(
-              
-             
               child: Image.asset("assets/Splash_image.png", fit: BoxFit.fill)),
         ),
         actions: [
@@ -93,120 +93,94 @@ class _HomePageState extends State<HomePage>
               controller: _tabController,
               children: [
                 _buildPostList(),
-                _buildPostList(),
+                _buildFollowingPage()
+                // Column(
+                //   children: [
+                //     // _buildFollowingPage(),
+                //     // SizedBox(height: 20),
+                //     _buildPostList(),
+                //   ],
+                // ),
               ],
             ),
           ),
         ],
       ),
-      // Bottom Navigation Bar
     );
   }
 
-  // Method to build list of posts
+  Widget _buildFollowingPage() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          child: Text(
+            "Live",
+            style: TextStyle(color: whiteColor, fontSize: 20),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          height: screenHeight * 0.15,
+          width: screenWidth,
+          child: ListView.separated(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    Container(
+                      width: screenHeight * 0.1,
+                      height: screenHeight * 0.1,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: iconColor, width: 5),
+                          image: DecorationImage(
+                              image: AssetImage("assets/person_image.png"),
+                              fit: BoxFit.cover)),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "@AliceK",
+                      style: TextStyle(color: whiteColor),
+                    )
+                  ],
+                );
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(
+                  width: 20,
+                  height: 20,
+                );
+              },
+              itemCount: 10),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          child: Text(
+            "Your Following",
+            style: TextStyle(color: whiteColor, fontSize: 20),
+          ),
+        ),
+        Expanded(child: _buildPostList())
+      ],
+    );
+  }
+
   Widget _buildPostList() {
-    return ListView.builder(
-      itemCount: 5,
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: homeList.length,
       padding: const EdgeInsets.all(10),
       itemBuilder: (context, index) {
-        return _buildPostCard();
+        return HomepageCard(homepageModel: homeList[index]);
       },
-    );
-  }
-
-  // Method to build individual post card
-  Widget _buildPostCard() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: const Color(0xFF2A2A42),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.purpleAccent),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // User Info
-          Row(
-            children: [
-              const CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://marketplace.canva.com/EAFOWUXOOvs/1/0/1600w/canva-green-gradient-minimalist-simple-instagram-profile-picture-tBlf3wVYGhg.jpg',
-                ),
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                'Alanna Myassa',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.more_horiz, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          // Post Content
-          const Text(
-            'The Earth has music for those who listen #NatureLovers #Explore #WildlifePhotography #MotherNature #NaturePerfection',
-            style: TextStyle(color: Colors.white),
-          ),
-          const SizedBox(height: 10),
-          // Post Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToIZgsflyd1YiDYZDYAti86gBy31voZnPEwA&s",
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 10),
-          // Post Actions
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon:
-                        const Icon(Icons.favorite_border, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                  const Text('1200', style: TextStyle(color: Colors.white)),
-                  const SizedBox(width: 15),
-                  IconButton(
-                    icon: const Icon(Icons.chat_bubble_outline,
-                        color: Colors.white),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  CommentScreen()));
-                    },
-                  ),
-                  const Text('193', style: TextStyle(color: Colors.white)),
-                  const SizedBox(width: 15),
-                  IconButton(
-                    icon: const Icon(Icons.send_sharp, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              IconButton(
-                icon: const Icon(Icons.graphic_eq, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ],
-      ),
+      separatorBuilder: (context, index) {
+        return SizedBox(
+          height: screenHeight * 0.02,
+        );
+      },
     );
   }
 }

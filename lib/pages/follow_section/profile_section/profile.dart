@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/pages/profile_section/edit_profile.dart';
+
 import 'package:hola_app/pages/follow_section/follower.dart';
 import 'package:hola_app/pages/follow_section/following.dart';
-import 'package:hola_app/pages/profile_section/share_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,7 +15,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileStat(String value, String label) {
+  _profileStat(String value, String label) {
     return Column(
       children: [
         Text(
@@ -44,7 +45,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   // Header Image
                   Container(
-                    height: screenHeight*0.25,
+                    height: screenHeight * 0.25,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
@@ -64,7 +65,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight*0.03),
+              SizedBox(height: screenHeight * 0.03),
               // Profile Info
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -93,9 +94,9 @@ class _ProfileState extends State<Profile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _ProfileStat('319', 'Posts'),
-                        _ProfileStat('2.1M', 'Followers'),
-                        _ProfileStat('576', 'Following'),
+                        _profileStat('319', 'Posts'),
+                        _profileStat('2.1M', 'Followers'),
+                        _profileStat('576', 'Following'),
                       ],
                     ),
                     SizedBox(height: screenHeight * 0.02),

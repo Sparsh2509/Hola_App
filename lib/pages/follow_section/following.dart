@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:hola_app/constants/chatting_list.dart';
+
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/following_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/landing.dart';
-import 'package:hola_app/shared/chatting_card.dart';
 import 'package:hola_app/shared/following_card.dart';
 
 class Following extends StatefulWidget {
@@ -15,12 +16,10 @@ class Following extends StatefulWidget {
 }
 
 class _FollowingState extends State<Following> {
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          
           appBar: AppBar(
             backgroundColor: blackColor,
             leading: IconButton(
@@ -32,7 +31,7 @@ class _FollowingState extends State<Following> {
                         builder: (BuildContext context) => Landing()));
               },
             ),
-            title: Text(
+            title: const Text(
               "Following",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -42,7 +41,7 @@ class _FollowingState extends State<Following> {
           ),
           body: Expanded(
             child: ListView.separated(
-              shrinkWrap: true,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
