@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/pages/homepage_section/homepage.dart';
 import 'package:hola_app/pages/landing.dart';
 
 class CommentScreen extends StatefulWidget {
@@ -105,7 +104,7 @@ class _CommentScreenState extends State<CommentScreen> {
           height: screenHeight*0.01,
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: TextField(
                   controller: _searchController,
                   style: TextStyle(color: whiteColor),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/chat_section/chat.dart';
-import 'package:hola_app/pages/comments.dart';
+import 'package:hola_app/pages/homepage_section/comments.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
 
 class HomePage extends StatefulWidget {
