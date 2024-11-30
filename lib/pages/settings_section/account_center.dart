@@ -33,9 +33,7 @@ class AccountCenter extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   height: screenWidth * 0.15,
                   width: screenWidth * 0.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+
                   child: CircleAvatar(
                     backgroundImage: AssetImage("assets/person_image.png"),
                   )),
@@ -73,61 +71,79 @@ class AccountCenter extends StatelessWidget {
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
-                  Row(
-                    children: [
-                      const Icon(Icons.lock, color: whiteColor),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        child: Text(
-                          "Password and Security",
-                          style: TextStyle(color: whiteColor, fontSize: 15),
-                        ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PasswordSecurity()));
+                    },
+                    child: Container(
+                      height: screenHeight*0.08,
+                      decoration: BoxDecoration(
+                                border: Border.all(color: iconColor),
+                                borderRadius: BorderRadius.circular(10)),
+                                
+                      child: Row(
+                        children: [
+                          const Icon(Icons.lock, color: whiteColor),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              "Password and Security",
+                              style: TextStyle(color: whiteColor, fontSize: 15),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: whiteColor,
+                                size: 15,
+                              )),
+                        ],
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PasswordSecurity()));
-                        },
-                        child: Align(
-                            alignment: Alignment.topRight,
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                  Container(
+                    height: screenHeight*0.08,
+                    decoration: BoxDecoration(
+                              border: Border.all(color: iconColor),
+                              borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.person, color: whiteColor),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            "Personal Details",
+                            style: TextStyle(color: whiteColor, fontSize: 15),
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment.center,
                             child: Icon(
                               Icons.arrow_forward_ios_outlined,
                               color: whiteColor,
                               size: 15,
                             )),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                  Row(
-                    children: const [
-                      Icon(Icons.person, color: whiteColor),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          "Personal Details",
-                          style: TextStyle(color: whiteColor, fontSize: 15),
-                        ),
-                      ),
-                      Align(
-                          alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: whiteColor,
-                            size: 15,
-                          )),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              height: screenHeight*0.02,
+            ),
             Container(
               decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                  BoxDecoration(borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: iconColor)),
+                  
               // color: whiteColor,
 
               child: Column(

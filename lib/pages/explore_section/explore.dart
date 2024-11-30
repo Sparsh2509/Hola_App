@@ -5,7 +5,6 @@ import 'package:hola_app/pages/explore_section/accounts.dart';
 import 'package:hola_app/pages/explore_section/community.dart';
 import 'package:hola_app/pages/explore_section/tags.dart';
 import 'package:hola_app/pages/explore_section/tops.dart';
-import 'package:hola_app/pages/follow_section/following.dart';
 
 class Explore extends StatefulWidget {
   const Explore({super.key});

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/accounts_list.dart';
-import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/shared/accounts_card.dart';
 

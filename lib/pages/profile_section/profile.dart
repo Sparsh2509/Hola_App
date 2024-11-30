@@ -3,6 +3,7 @@ import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/follow_section/follower.dart';
 import 'package:hola_app/pages/follow_section/following.dart';
+import 'package:hola_app/pages/settings_section/settings_page.dart';
 
 
 class Profile extends StatefulWidget {
@@ -42,6 +43,9 @@ class _ProfileState extends State<Profile> {
               Stack(
                 children: [
                   // Header Image
+                  
+                  
+                  
                   Container(
                     height: screenHeight*0.25,
                     decoration: BoxDecoration(
@@ -52,7 +56,29 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  // Profile Photo
+                  Positioned(
+                    top: 0,
+                    
+                     right: 0.0,
+                     child: Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: IconButton(
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Settings()),
+                            );
+
+                        },
+                         icon: Icon(
+                                Icons.settings,
+                                color: Colors.black,
+                                size: 30,
+                                ),
+                       ),
+                     ),),
+                  
                   Positioned(
                     bottom: 0,
                     left: screenWidth / 2 - 50,
