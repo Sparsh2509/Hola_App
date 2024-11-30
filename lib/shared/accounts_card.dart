@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 
+// ignore: must_be_immutable
 class AccountsCard extends StatelessWidget {
   AccountsCard({
     required this.imageUrl,

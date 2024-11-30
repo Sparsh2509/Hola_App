@@ -77,16 +77,16 @@ class _PasswordState extends State<Password> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Image.asset(
-              "assets/bg_image.png",
-              width: screenWidth,
-              height: screenHeight,
-              fit: BoxFit.cover,
-            ),
-            Padding(
+      body: Stack(
+        children: [
+          Image.asset(
+            "assets/bg_image.png",
+            width: screenWidth,
+            height: screenHeight,
+            fit: BoxFit.cover,
+          ),
+          SingleChildScrollView(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Form(
                   key: _form,
@@ -145,9 +145,9 @@ class _PasswordState extends State<Password> {
                       ),
                     ],
                   )),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     ));
   }
