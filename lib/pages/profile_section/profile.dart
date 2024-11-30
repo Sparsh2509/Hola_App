@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/pages/profile_section/edit_profile.dart';
 import 'package:hola_app/pages/follow_section/follower.dart';
 import 'package:hola_app/pages/follow_section/following.dart';
-import 'package:hola_app/pages/profile_section/share_profile.dart';
+
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

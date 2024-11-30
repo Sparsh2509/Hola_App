@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/pages/explore.dart';
+import 'package:hola_app/pages/explore_section/explore.dart';
 import 'package:hola_app/pages/homepage_section/homepage.dart';
 import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post.dart';
@@ -35,35 +35,6 @@ class _LandingState extends State<Landing> {
 
     }
   }
-  // SafeArea(
-  //       child: Scaffold(
-  //     body: SingleChildScrollView(
-  //       child: Container(
-  //         height: screenHeight * 0.25,
-  //         width: screenWidth,
-  //         decoration: BoxDecoration(color: Colors.red),
-  //         child: Stack(
-  //           children: [
-  //             Image.asset("assets/chat_bg_image.png",fit: BoxFit.contain,width: screenWidth,),
-  //             Positioned(
-  //               bottom: 0,
-  //               width: screenWidth/2,
-  //               child:Center(
-  //                 child: Container(
-  //                   height: screenHeight*0.05,
-  //                   decoration: BoxDecoration(
-  //                     color: Colors.green
-  //                   ),
-                    
-  //                 ),
-  //               ),
-
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   ));
   
 
   @override
