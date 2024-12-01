@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/pages/explore_section/explore.dart';
-import 'package:hola_app/pages/homepage_section/homepage.dart';
 import 'package:hola_app/pages/landing_section/landing_2.dart';
 import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post.dart';

@@ -12,6 +12,7 @@ class DmPage extends StatefulWidget {
 }
 
 class _DmPageState extends State<DmPage> {
+  final TextEditingController _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,35 +73,57 @@ class _DmPageState extends State<DmPage> {
                 topLeft: Radius.circular(40),
                 topRight: Radius.circular(40),
               )),
-              child: Column(
-                children: [
-                  Container(height: 40),
-                  Expanded(child: ListView.builder(itemBuilder: (context,index){
-                    return Row(
-                      mainAxisAlignment: index%3 == 0 ? MainAxisAlignment.start : MainAxisAlignment.end,
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minWidth: screenWidth * 0.1,
-                            maxWidth: screenWidth * 0.7
-                          ),
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: index%3 == 0  ? iconColor : whiteColor,
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Text("Test"* index * 2),
-                          ),
-                          
-                        )
-                      ],
-                    );
-                  },itemCount: 20)),
-                  TextFormField()
-                ],
-              ),
+          child: Column(
+            children: [
+              Container(height: 40),
+              Expanded(
+                  child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Row(
+                          mainAxisAlignment: index % 3 == 0
+                              ? MainAxisAlignment.start
+                              : MainAxisAlignment.end,
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  minWidth: screenWidth * 0.1,
+                                  maxWidth: screenWidth * 0.7),
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 8),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color:
+                                        index % 3 == 0 ? iconColor : whiteColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text("Test" * index * 2),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                      itemCount: 20)),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: TextFormField(
+                  style: TextStyle(color: iconColor),
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    hintText: "Type a message",hintStyle: TextStyle(color: whiteColor),
+                    prefixIcon: Icon(Icons.message,color: whiteColor,),
+                    suffixIcon: Icon(Icons.send,color: whiteColor,),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: iconColor)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: iconColor)),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ));

@@ -14,7 +14,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileStat(String value, String label) {
+  _profileStat(String value, String label) {
     return Column(
       children: [
         Text(
@@ -118,9 +118,9 @@ class _ProfileState extends State<Profile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _ProfileStat('319', 'Posts'),
-                        _ProfileStat('2.1M', 'Followers'),
-                        _ProfileStat('576', 'Following'),
+                        _profileStat('319', 'Posts'),
+                        _profileStat('2.1M', 'Followers'),
+                        _profileStat('576', 'Following'),
                       ],
                     ),
                     SizedBox(height: screenHeight * 0.02),
