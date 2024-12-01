@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/follower_list.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/pages/landing.dart';
+import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/shared/follower_card.dart';
 
 class Follower extends StatefulWidget {

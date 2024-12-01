@@ -5,7 +5,7 @@ import 'package:hola_app/constants/chatting_list.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/chat_section/dmpage.dart';
-import 'package:hola_app/pages/landing.dart';
+import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/shared/chatting_card.dart';
 
 class Chats extends StatefulWidget {

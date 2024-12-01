@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/signin_model.dart';
-import 'package:hola_app/pages/landing.dart';
+import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/pages/login_section/password.dart';
 import 'package:http/http.dart';
 

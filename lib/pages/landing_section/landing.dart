@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/pages/explore_section/explore.dart';
 import 'package:hola_app/pages/homepage_section/homepage.dart';
+import 'package:hola_app/pages/landing_section/landing_2.dart';
 import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post.dart';
 import 'package:hola_app/pages/profile_section/profile.dart';
@@ -27,7 +28,7 @@ class _LandingState extends State<Landing> {
 
   _getBody(){
     switch (selectedIndex){
-      case 0: return const HomePage();
+      case 0: return const Landing2();
       case 1: return const Explore();
       case 2: return const Post();
       case 3: return const Location();
