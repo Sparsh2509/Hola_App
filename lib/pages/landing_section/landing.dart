@@ -3,7 +3,7 @@ import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/pages/explore_section/explore.dart';
 import 'package:hola_app/pages/landing_section/landing_2.dart';
 import 'package:hola_app/pages/location.dart';
-import 'package:hola_app/pages/post.dart';
+import 'package:hola_app/pages/post_section/post.dart';
 import 'package:hola_app/pages/profile_section/profile.dart';
 
 class Landing extends StatefulWidget {

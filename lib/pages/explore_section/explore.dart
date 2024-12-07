@@ -42,11 +42,13 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     }
   }
   
+  @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
 
+  @override
   void dispose() {
     _tabController.dispose();
     _searchController.dispose();
@@ -67,7 +69,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 controller: _searchController,
                 decoration: InputDecoration(
                   hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -82,7 +84,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               unselectedLabelColor: whiteColor,
               indicatorColor: iconColor,
               indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
+              tabs: const [
                 Tab(
                   child: Text(
                     "Trending",style: TextStyle(
@@ -124,7 +126,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 2 columns
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
@@ -133,7 +135,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage(
                     'assets/post_image.png'), // Add your photo assets
                 fit: BoxFit.cover,
@@ -150,7 +152,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     return Column(
       children: [
         Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               height: screenHeight * 0.08,
               width: screenWidth,
           child: ListView.separated(
@@ -167,7 +169,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                         });
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         height: screenHeight * 0.05,
                         // width: screenHeight*0.08,
                         decoration: BoxDecoration(

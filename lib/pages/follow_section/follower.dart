@@ -21,15 +21,15 @@ class _FollowerState extends State<Follower> {
           appBar: AppBar(
             backgroundColor: blackColor,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: whiteColor),
+              icon: const Icon(Icons.arrow_back, color: whiteColor),
               onPressed: () {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => Landing()));
+                        builder: (BuildContext context) => const Landing()));
               },
             ),
-            title: Text(
+            title: const Text(
               "Followers",
               style: TextStyle(
                 fontWeight: FontWeight.bold,

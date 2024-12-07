@@ -1,8 +1,13 @@
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/post_list.dart';
+import 'package:hola_app/models/post_model.dart';
 import 'package:hola_app/pages/location.dart';
+import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Post extends StatefulWidget {
@@ -50,7 +55,7 @@ class _PostState extends State<Post> {
         // body: SingleChildScrollView(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           
           'CREATE POST',
           style: TextStyle(fontSize: 15,color: whiteColor)
@@ -69,7 +74,7 @@ class _PostState extends State<Post> {
           child: Column(
             children: [
               TextField(
-                style: TextStyle(color: iconColor),
+                style: const TextStyle(color: iconColor),
                 controller: captionController,
                 maxLines: 2,
                 decoration: const InputDecoration(
@@ -93,7 +98,7 @@ class _PostState extends State<Post> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: greyColor),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Select a Image',
                           style: TextStyle(fontSize: 15)
@@ -108,7 +113,7 @@ class _PostState extends State<Post> {
               const SizedBox(height: 10),
               // Post Content TextField
               TextField(
-                style: TextStyle(color: iconColor),
+                style: const TextStyle(color: iconColor),
                 controller: postController,
                 maxLines: 2,
                 decoration: const InputDecoration(
@@ -121,15 +126,15 @@ class _PostState extends State<Post> {
                   if (postController.text.isNotEmpty || selectedImage != null) {
                     setState(
                       () {
-                        posts.add({
+                        postList.add({
                           'text': postController.text,
                           'caption': captionController.text,
                           'image': selectedImage,
-                        });
+                        } as PostModel);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Location()));
+                                builder: (context) => const PostCreated()));
                       },
                     );
                     postController.clear();

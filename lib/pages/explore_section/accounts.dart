@@ -5,6 +5,8 @@ import 'package:hola_app/shared/accounts_card.dart';
 
 // ignore: must_be_immutable
 class Accounts extends StatefulWidget {
+  const Accounts({super.key});
+
   @override
   State<Accounts> createState() => _AccountsState();
 }

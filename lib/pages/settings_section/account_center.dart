@@ -85,9 +85,9 @@ class AccountCenter extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10)),
                                 
                       child: Row(
-                        children: [
-                          const Icon(Icons.lock, color: whiteColor),
-                          const SizedBox(width: 10),
+                        children: const [
+                          Icon(Icons.lock, color: whiteColor),
+                          SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               "Password and Security",

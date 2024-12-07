@@ -19,7 +19,7 @@ class _ProfileState extends State<Profile> {
       children: [
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -27,7 +27,7 @@ class _ProfileState extends State<Profile> {
         ),
         Text(
           label,
-          style: TextStyle(color: Colors.white70, fontSize: 16),
+          style: const TextStyle(color: Colors.white70, fontSize: 16),
         ),
       ],
     );
@@ -48,7 +48,7 @@ class _ProfileState extends State<Profile> {
                   
                   Container(
                     height: screenHeight*0.25,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
                             'assets/post_image.png'), // Add your header image
@@ -67,11 +67,11 @@ class _ProfileState extends State<Profile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Settings()),
+                                  builder: (context) => const Settings()),
                             );
 
                         },
-                         icon: Icon(
+                         icon: const Icon(
                                 Icons.settings,
                                 color: Colors.black,
                                 size: 30,
@@ -82,7 +82,7 @@ class _ProfileState extends State<Profile> {
                   Positioned(
                     bottom: 0,
                     left: screenWidth / 2 - 50,
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 50,
                       backgroundImage: AssetImage('assets/person_image.png'),
                     ),
@@ -95,7 +95,7 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Richard Wright',
                       style: TextStyle(
                         color: whiteColor,
@@ -104,12 +104,12 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.02),
-                    Text(
+                    const Text(
                       "I’m delighted to introduce myself\n as aprofessional musician",
                       style: TextStyle(color: whiteColor),
                     ),
                     SizedBox(height: screenHeight * 0.03),
-                    Text(
+                    const Text(
                       'Trusting the process ',
                       style: TextStyle(color: whiteColor, fontSize: 16),
                       textAlign: TextAlign.center,
@@ -132,16 +132,16 @@ class _ProfileState extends State<Profile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Following()),
+                                  builder: (context) => const Following()),
                             );
                           },
                           child: Container(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(color: whiteColor)),
-                              child: Text(
+                              child: const Text(
                                 'Edit Profile',
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 15),
@@ -152,16 +152,16 @@ class _ProfileState extends State<Profile> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Follower()),
+                                  builder: (context) => const Follower()),
                             );
                           },
                           child: Container(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                   left: 20, right: 20, top: 10, bottom: 10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(color: whiteColor)),
-                              child: Text(
+                              child: const Text(
                                 'Share Profile',
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 15),
@@ -177,8 +177,8 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.all(15),
                 child: GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
@@ -187,7 +187,7 @@ class _ProfileState extends State<Profile> {
                   itemBuilder: (context, index) {
                     return Container(
                       decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage(
                               'assets/post_image.png'), // Add your photo assets
                           fit: BoxFit.cover,

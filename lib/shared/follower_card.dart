@@ -5,7 +5,7 @@ import 'package:hola_app/pages/chat_section/chat.dart';
 
 // ignore: must_be_immutable
 class FollowerCard extends StatelessWidget {
-  FollowerCard({
+  FollowerCard({super.key, 
     required this.imageUrl,
     required this.text,
     required this.subtitle,
@@ -46,14 +46,14 @@ class FollowerCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Chats()),
+                MaterialPageRoute(builder: (context) => const Chats()),
               );
             },
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: iconColor, borderRadius: BorderRadius.circular(15)),
-              child: Text(
+              child: const Text(
                 "Message",
                 style: TextStyle(fontSize: 12),
               ),

@@ -4,7 +4,7 @@ import 'package:hola_app/constants/size.dart';
 
 // ignore: must_be_immutable
 class AccountsCard extends StatelessWidget {
-  AccountsCard({
+  AccountsCard({super.key, 
     required this.imageUrl,
     required this.text,
     required this.subtitle,
