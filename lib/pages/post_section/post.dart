@@ -5,8 +5,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/post_list.dart';
-import 'package:hola_app/models/post_model.dart';
-import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,7 +18,7 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   final TextEditingController postController = TextEditingController();
   final TextEditingController captionController = TextEditingController();
-   final List<Map<String, dynamic>> posts = [];
+  
 
   File? selectedImage;
   final picker = ImagePicker();
@@ -78,7 +76,7 @@ class _PostState extends State<Post> {
                 controller: captionController,
                 maxLines: 2,
                 decoration: const InputDecoration(
-                  hintText: 'Add a caption...',hintStyle: TextStyle(color: iconColor),
+                  hintText: 'Add a Caption',hintStyle: TextStyle(color: iconColor),
                 ),
               ),
               const SizedBox(height: 20),
@@ -126,11 +124,14 @@ class _PostState extends State<Post> {
                   if (postController.text.isNotEmpty || selectedImage != null) {
                     setState(
                       () {
-                        postList.add({
-                          'text': postController.text,
-                          'caption': captionController.text,
-                          'image': selectedImage,
-                        } as PostModel);
+                        postList.add(
+                          // dynamic image : widget.PostModel.image, 
+                          // dynamic text : widget.PostModel.text ,
+                          // dynamic caption : widget.PostModel.caption )
+                          text: postController.text,
+                          caption: captionController.text,
+                          image: selectedImage,
+                          );
                         Navigator.push(
                             context,
                             MaterialPageRoute(

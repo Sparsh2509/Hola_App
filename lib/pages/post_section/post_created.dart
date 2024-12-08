@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/post_list.dart';
-import 'package:hola_app/constants/post_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/post_section/post.dart';
 import 'package:hola_app/shared/post_card.dart';
