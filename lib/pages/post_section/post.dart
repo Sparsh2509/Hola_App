@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/post_list.dart';
 import 'package:hola_app/models/post_model.dart';
-import 'package:hola_app/pages/post_section/post_created.dart';
+import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Post extends StatefulWidget {
@@ -72,7 +72,7 @@ class _PostState extends State<Post> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
                 style: const TextStyle(color: iconColor),
                 controller: captionController,
                 maxLines: 2,
@@ -133,7 +133,7 @@ class _PostState extends State<Post> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const PostCreated()));
+                                builder: (context) => const Landing()));
                       },
                     );
                     postController.clear();

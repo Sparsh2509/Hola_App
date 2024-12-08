@@ -4,6 +4,7 @@ import 'package:hola_app/pages/explore_section/explore.dart';
 import 'package:hola_app/pages/landing_section/landing_2.dart';
 import 'package:hola_app/pages/location.dart';
 import 'package:hola_app/pages/post_section/post.dart';
+import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:hola_app/pages/profile_section/profile.dart';
 
 class Landing extends StatefulWidget {
@@ -30,8 +31,9 @@ class _LandingState extends State<Landing> {
       case 0: return const Landing2();
       case 1: return const Explore();
       case 2: return const Post();
-      case 3: return const Location();
-      case 4: return const Profile();
+      case 3: return const PostCreated();
+      case 4: return const Location();
+      case 5: return const Profile();
 
     }
   }
@@ -72,15 +74,22 @@ class _LandingState extends State<Landing> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.location_on,
+              Icons.post_add,
               color: selectedIndex == 3 ? whiteColor :  iconColor,
             ),
             label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.my_location_outlined,
               color: selectedIndex == 4 ? whiteColor :  iconColor,
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: selectedIndex == 5 ? whiteColor :  iconColor,
             ),
             label: "",
           ),
