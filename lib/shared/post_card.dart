@@ -50,6 +50,15 @@ class PostCard extends StatelessWidget {
                 Text(postModel.text,
                     style: TextStyle(fontSize: 15, color: whiteColor)),
                 SizedBox(height: screenHeight * 0.02),
+                // ClipRRect(
+                //       borderRadius: BorderRadius.circular(20),
+                //       child: Image.file(
+                //         postModel.image!,
+                //         height: 200,
+                //         width: double.infinity,
+                //         fit: BoxFit.cover,
+                //       ),
+                //     ),
                 Container(
                   height: screenHeight * 0.2,
                   width: screenWidth,
@@ -58,7 +67,7 @@ class PostCard extends StatelessWidget {
                     border: Border.all(color: iconColor),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(postModel.image as String),
+                        image: FileImage(postModel.image),
                         fit: BoxFit.cover),
                   ),
                 ),

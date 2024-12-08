@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/post_list.dart';
+import 'package:hola_app/models/post_model.dart';
 import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -125,12 +126,9 @@ class _PostState extends State<Post> {
                     setState(
                       () {
                         postList.add(
-                          // dynamic image : widget.PostModel.image, 
-                          // dynamic text : widget.PostModel.text ,
-                          // dynamic caption : widget.PostModel.caption )
-                          text: postController.text,
+                          PostModel(text: postController.text,
                           caption: captionController.text,
-                          image: selectedImage,
+                          image: selectedImage!)
                           );
                         Navigator.push(
                             context,
