@@ -1,13 +1,17 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/homepage_list.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/constants/user_token.dart';
 
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
 import 'package:hola_app/shared/homepage_card.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,9 +24,12 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
+    _getHomePagePost();
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -30,6 +37,36 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  _getHomePagePost() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      print("token = $token");
+      var response =
+          await http.get(Uri.parse('https://snapverse-6nqx.onrender.com/home/posts'),
+              headers: Map<String, String>.from({
+                "code": "90883d39d08182c691d6ccbd88df7781538f4ca0"
+              }));
+      print(response.body.toString());
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+
+        print(response.body.toString());
+        setState(() {
+          isLoading = false;
+        });
+
+        print('Post fetched successfully');
+      } else {
+        print('failed');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -169,30 +206,35 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildPostList() {
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: homeList.length,
-      padding: const EdgeInsets.all(10),
-      itemBuilder: (context, index) {
-        return HomepageCard(
-          homepageModel: homeList[index],
-          onValueChanged: () {
-            setState(() {
-              homeList[index].isliked = !homeList[index].isliked;
-              if (homeList[index].isliked) {
-                homeList[index].likes++;
-              } else {
-                homeList[index].likes--;
-              }
-            });
-          },
-        );
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(
-          height: screenHeight * 0.02,
-        );
-      },
-    );
+    return isLoading
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [CircularProgressIndicator()],
+          )
+        : ListView.separated(
+            shrinkWrap: true,
+            itemCount: homeList.length,
+            padding: const EdgeInsets.all(10),
+            itemBuilder: (context, index) {
+              return HomepageCard(
+                homepageModel: homeList[index],
+                onValueChanged: () {
+                  setState(() {
+                    homeList[index].isliked = !homeList[index].isliked;
+                    if (homeList[index].isliked) {
+                      homeList[index].likes++;
+                    } else {
+                      homeList[index].likes--;
+                    }
+                  });
+                },
+              );
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: screenHeight * 0.02,
+              );
+            },
+          );
   }
 }

@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, unused_local_variable, prefer_interpolation_to_compose_strings, use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/constants/user_token.dart';
 import 'package:hola_app/models/signin_model.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/pages/login_section/password.dart';
@@ -20,6 +23,8 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool isLoading = false;
+
   Future<void> createSign(String password, String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
@@ -29,6 +34,9 @@ class _SignInState extends State<SignIn> {
           password: _passwordController.text.trim());
 
       try {
+        setState(() {
+          isLoading = true;
+        });
         Response response = await post(
             Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/login'),
             body: {
@@ -40,6 +48,11 @@ class _SignInState extends State<SignIn> {
         print("login = " + response.body.toString());
 
         if (response.statusCode == 200) {
+          var data = jsonDecode(response.body.toString());
+         token = data['user']['resetPasswordToken'];
+         setState(() {
+           isLoading = false;
+         });
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (BuildContext context) => Landing()));
 
@@ -48,9 +61,17 @@ class _SignInState extends State<SignIn> {
           print('Login successfully');
         } else {
           print('failed');
+          setState(() {
+            isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Failed!! \n Please try again",textAlign: TextAlign.center,)));
         }
       } catch (e) {
         print(e.toString());
+        setState(() {
+            isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Failed!! \n Please try again",textAlign: TextAlign.center,)));
       }
     } else {
       print("here");
@@ -166,7 +187,7 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                       SizedBox(height: screenHeight * 0.08),
-                      GestureDetector(
+                     isLoading? CircularProgressIndicator():  GestureDetector(
                         onTap: () {
                           createSign(_passwordController.text.toString(),
                               _emailController.text.toString());
