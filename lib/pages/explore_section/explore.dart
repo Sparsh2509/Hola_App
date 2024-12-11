@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/constants/homepage_list.dart';
-import 'package:hola_app/constants/post_list.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/models/homepage_model.dart';
 import 'package:hola_app/pages/explore_section/accounts.dart';
 import 'package:hola_app/pages/explore_section/community.dart';
 import 'package:hola_app/pages/explore_section/tags.dart';
@@ -99,9 +96,9 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
       }
     } catch (e) {
       print(e.toString());
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
     }
   }
 

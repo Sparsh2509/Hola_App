@@ -3,8 +3,8 @@ import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/follow_section/follower.dart';
 import 'package:hola_app/pages/follow_section/following.dart';
+import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:hola_app/pages/settings_section/settings_page.dart';
-
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,22 +14,88 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  _profileStat(String value, String label) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+  _profileStat1(String value, String label) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const PostCreated()),
+        );
+      },
+
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white70, fontSize: 16),
-        ),
-      ],
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 16),
+          ),
+          Divider()
+        ],
+      ),
+    );
+  }
+
+  _profileStat2(String value, String label) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Follower()),
+        );
+      },
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 16),
+          ),
+          Divider()
+        ],
+      ),
+    );
+  }
+
+  _profileStat3(String value, String label) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Following()),
+        );
+      },
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 16),
+          ),
+          Divider()
+        ],
+      ),
     );
   }
 
@@ -43,11 +109,9 @@ class _ProfileState extends State<Profile> {
               Stack(
                 children: [
                   // Header Image
-                  
-                  
-                  
+
                   Container(
-                    height: screenHeight*0.25,
+                    height: screenHeight * 0.25,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
@@ -58,27 +122,26 @@ class _ProfileState extends State<Profile> {
                   ),
                   Positioned(
                     top: 0,
-                    
-                     right: 0.0,
-                     child: Padding(
-                       padding: const EdgeInsets.all(8.0),
-                       child: IconButton(
-                        onPressed: (){
+                    right: 0.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                        onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Settings()),
-                            );
-
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Settings()),
+                          );
                         },
-                         icon: const Icon(
-                                Icons.settings,
-                                color: Colors.black,
-                                size: 30,
-                                ),
-                       ),
-                     ),),
-                  
+                        icon: const Icon(
+                          Icons.settings,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   Positioned(
                     bottom: 0,
                     left: screenWidth / 2 - 50,
@@ -89,7 +152,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight*0.03),
+              SizedBox(height: screenHeight * 0.03),
               // Profile Info
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -118,9 +181,9 @@ class _ProfileState extends State<Profile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _profileStat('319', 'Posts'),
-                        _profileStat('2.1M', 'Followers'),
-                        _profileStat('576', 'Following'),
+                        _profileStat1('319', 'Posts'),
+                        _profileStat2('2.1M', 'Followers'),
+                        _profileStat3('576', 'Following'),
                       ],
                     ),
                     SizedBox(height: screenHeight * 0.02),
