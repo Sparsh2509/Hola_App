@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
@@ -5,6 +7,7 @@ import 'package:hola_app/pages/follow_section/follower.dart';
 import 'package:hola_app/pages/follow_section/following.dart';
 import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:hola_app/pages/settings_section/settings_page.dart';
+import 'package:http/http.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,6 +17,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool isLoading = true;
+  List<String> imageUrls = [];
+   @override
+     void initState() {
+    super.initState();
+    _getYourPost();
+   }
+  
+  
+
   _profileStat1(String value, String label) {
     return GestureDetector(
       onTap: () {
@@ -37,7 +50,16 @@ class _ProfileState extends State<Profile> {
             label,
             style: const TextStyle(color: Colors.white70, fontSize: 16),
           ),
-          Divider()
+          VerticalDivider(
+            
+            width: 20,
+            thickness: 1,
+            indent: 20,
+            color: whiteColor,
+            // endIndent: 0,
+            // color: Colors.grey,
+
+          )
         ],
       ),
     );
@@ -97,6 +119,50 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+
+  void _getYourPost() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      Response response = await get(
+        Uri.parse('https://snapverse-6nqx.onrender.com/posts'),
+      );
+
+      // print("explore post = " + response.statusCode.toString());
+      // print("explore post = " + response.body.toString());
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString())['posts'];
+        for (var item in data) {
+          if (item['image'] == null) {
+          } else {
+            print(item['image']['url']);
+            imageUrls.add(item['image']['url'] ??
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReiKeTsm26jLOx1RQhXGkRSPWNj2tCeMKdUA&s");
+          }
+        }
+
+        setState(() {
+          isLoading = false;
+        });
+
+        print(response.body.toString());
+
+        print('Login successfully');
+      } else {
+        print('failed');
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+      // setState(() {
+      //   isLoading = false;
+      // });
+    }
   }
 
   @override
@@ -238,7 +304,11 @@ class _ProfileState extends State<Profile> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: GridView.builder(
+                child:isLoading
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [CircularProgressIndicator()],
+          ): GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -246,13 +316,13 @@ class _ProfileState extends State<Profile> {
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                   ),
-                  itemCount: 9, // Adjust based on the number of images
+                  itemCount: imageUrls.length, // Adjust based on the number of images
                   itemBuilder: (context, index) {
                     return Container(
                       decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage(
-                              'assets/post_image.png'), // Add your photo assets
+                        image: DecorationImage(
+                          image:NetworkImage(
+                              imageUrls[index]), // Add your photo assets
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(8),
