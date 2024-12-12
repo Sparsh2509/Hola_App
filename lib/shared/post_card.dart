@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
@@ -25,7 +27,7 @@ class PostCard extends StatelessWidget {
         // height: screenHeight*0.5,
         child: Container(
           // color: blackColor,
-          height: screenHeight * 0.4,
+          height: screenHeight * 0.45,
 
           decoration: BoxDecoration(
               border: Border.all(color: iconColor),

@@ -17,26 +17,28 @@ class _AccountsState extends State<Accounts> {
     return SafeArea(
       child: Scaffold(
           body: Expanded(
-        child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
+            // child: Container()
+            child:  ListView(children: accountList,),
+        // child: ListView.separated(
+        //     shrinkWrap: true,
+        //     itemBuilder: (context, index) {
+        //       return GestureDetector(
+        //         onTap: () {
                   
-                },
-                child: Row(children: [
-                  AccountsCard(
-                    imageUrl: accountList[index].imageUrl,
-                    text: accountList[index].text,
-                    subtitle: accountList[index].subtitle,
-                  ),
-                ]),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(height: screenHeight * 0.0);
-            },
-            itemCount: accountList.length),
+        //         },
+        //         child: Row(children: [
+        //           AccountsCard(
+        //             imageUrl: accountList[index].imageUrl,
+        //             text: accountList[index].text,
+        //             subtitle: accountList[index].subtitle,
+        //           ),
+        //         ]),
+        //       );
+        //     },
+        //     separatorBuilder: (context, index) {
+        //       return SizedBox(height: screenHeight * 0.0);
+        //     },
+        //     itemCount: accountList.length),
       )),
     );
   }

@@ -44,11 +44,10 @@ class _HomePageState extends State<HomePage>
       setState(() {
         isLoading = true;
       });
-      print("token = $token");
       var response =
-          await http.get(Uri.parse('https://snapverse-6nqx.onrender.com/home/posts'),
+          await http.get(Uri.parse(baseUrl + "home/posts"),
               headers: Map<String, String>.from({
-                "code": "90883d39d08182c691d6ccbd88df7781538f4ca0"
+                "cookie": token
               }));
       print(response.body.toString());
 

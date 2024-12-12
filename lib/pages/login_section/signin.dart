@@ -48,8 +48,9 @@ class _SignInState extends State<SignIn> {
         print("login = " + response.body.toString());
 
         if (response.statusCode == 200) {
-          var data = jsonDecode(response.body.toString());
-         token = data['user']['resetPasswordToken'];
+          print('Cookies from response:${response.headers['set-cookie']?.substring(0,response.headers['set-cookie']?.indexOf(';'))}');
+         token = response.headers['set-cookie']!.substring(0,response.headers['set-cookie']?.indexOf(';'));
+         print("token = $token");
          setState(() {
            isLoading = false;
          });
@@ -59,7 +60,7 @@ class _SignInState extends State<SignIn> {
           print(response.body.toString());
 
           print('Login successfully');
-        } else {
+        }else {
           print('failed');
           setState(() {
             isLoading = false;
