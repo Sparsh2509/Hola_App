@@ -38,7 +38,7 @@ class _PostCreatedState extends State<PostCreated> {
           itemCount: postList.length,
           itemBuilder: (context, index) {
             return PostCard(
-              postModel : postList[index],
+              postModel : postList[index], onValueChanged: null,
         
               
             );

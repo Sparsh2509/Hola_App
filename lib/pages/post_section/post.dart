@@ -128,7 +128,10 @@ class _PostState extends State<Post> {
                         postList.add(
                           PostModel(text: postController.text,
                           caption: captionController.text,
-                          image: selectedImage!)
+                          image: selectedImage!,
+                          comments: 30,
+                          likes: 120,
+                          isliked: false)
                           );
                         Navigator.push(
                             context,

@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/post_model.dart';
+import 'package:hola_app/pages/homepage_section/comments.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard(
       {super.key,
       required this.postModel,
+      required this.onValueChanged,
       });
 
    final PostModel postModel;
+   final onValueChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class PostCard extends StatelessWidget {
         // height: screenHeight*0.5,
         child: Container(
           // color: blackColor,
-          height: screenHeight * 0.47,
+          height: screenHeight * 0.4,
 
           decoration: BoxDecoration(
               border: Border.all(color: iconColor),
@@ -74,6 +77,55 @@ class PostCard extends StatelessWidget {
                 SizedBox(
                   height: screenHeight * 0.02,
                 ),
+                                Row(
+                  children: [
+                    IconButton(
+                        onPressed: onValueChanged,
+                        icon: Icon(
+                          postModel.isliked
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
+                          color: postModel.isliked ? redColor : whiteColor,
+                        )),
+                    SizedBox(
+                      width: screenWidth * 0.01,
+                    ),
+                    Text(
+                      postModel.likes.toString(),
+                      style: TextStyle(color: whiteColor),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.02,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentScreen()));
+                        },
+                        icon: Icon(
+                          Icons.comment,
+                          color: whiteColor,
+                        )),
+                    SizedBox(
+                      width: screenWidth * 0.01,
+                    ),
+                    Text(
+                      postModel.comments.toString(),
+                      style: TextStyle(color: whiteColor),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.03,
+                    ),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.near_me,
+                          color: whiteColor,
+                        )),
+                  ],
+                )
                 
               ],
             ),
