@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hola_app/constants/accounts_list.dart';
 import 'package:hola_app/constants/data_constants.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/services/user_services.dart';

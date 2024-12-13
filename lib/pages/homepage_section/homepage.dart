@@ -1,18 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/data_constants.dart';
-import 'package:hola_app/constants/homepage_list.dart';
+
 import 'package:hola_app/constants/size.dart';
 
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
 import 'package:hola_app/services/post_services.dart';
 import 'package:hola_app/shared/homepage_card.dart';
-import 'package:http/http.dart' as http;
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

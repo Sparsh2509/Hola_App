@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, non_constant_identifier_names, unused_local_variable, use_build_context_synchronously
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/pages/landing_section/landing.dart';
+
 import 'package:hola_app/pages/login_section/emailverfiy.dart';
 import 'package:hola_app/pages/login_section/signin.dart';
 import 'package:hola_app/services/auth.dart';
-import 'package:http/http.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
@@ -9,7 +9,7 @@ import 'package:hola_app/pages/explore_section/community.dart';
 import 'package:hola_app/pages/explore_section/tags.dart';
 import 'package:hola_app/pages/explore_section/tops.dart';
 import 'package:hola_app/services/post_services.dart';
-import 'package:http/http.dart';
+
 
 class Explore extends StatefulWidget {
   const Explore({super.key});

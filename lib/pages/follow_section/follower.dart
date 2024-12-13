@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/data_constants.dart';
-import 'package:hola_app/constants/follower_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/profile_section/profile.dart';
 import 'package:hola_app/services/user_services.dart';
