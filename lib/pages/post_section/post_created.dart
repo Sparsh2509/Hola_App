@@ -1,55 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:hola_app/constants/colors.dart';
-import 'package:hola_app/constants/post_list.dart';
-import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/shared/post_card.dart';
+// import 'package:flutter_share/flutter_share.dart';
+import 'package:hola_app/constants/postapi.dart';
 
 class PostCreated extends StatefulWidget {
-
-
-  const PostCreated({super.key});
-
   @override
-  State<PostCreated> createState() => _PostCreatedState();
+  _PostCreatedState createState() => _PostCreatedState();
 }
 
 class _PostCreatedState extends State<PostCreated> {
-  
+  final ApiService apiService = ApiService();
+  late Future<List<dynamic>> postsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    postsFuture = apiService.fetchPosts();
+  }
+
+  // Future<void> _sharePost(String title, String body) async {
+  //   await FlutterShare.share(
+  //     title: title,
+  //     text: body,
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: const Text('Your Post',
-              style: TextStyle(fontSize: 15, color: whiteColor)),
-          centerTitle: true,
-          // leading: IconButton(
-          //   icon: const Icon(Icons.arrow_back, color: whiteColor),
-          //   onPressed: () {
-          //     Navigator.pushReplacement(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (BuildContext context) => const Post()));
-          //   },
-          // ),
-        ),
-        body: ListView.separated(
-          itemCount: postList.length,
-          itemBuilder: (context, index) {
-            return PostCard(
-              postModel : postList[index], onValueChanged: null,
-        
-              
-            );
-          },
-          separatorBuilder: (context, index) {
-          return SizedBox(
-            height: screenHeight*0.02,
+    return Scaffold(
+      appBar: AppBar(title: Text("Posts")),
+      body: FutureBuilder<List<dynamic>>(
+        future: postsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("No posts found."));
+          }
+
+          final posts = snapshot.data!;
+          return ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return Card(
+                margin: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (post['imageUrl'] != null)
+                      Image.network(post['imageUrl'], fit: BoxFit.cover),
+                    ListTile(
+                      title: Text(post['title'] ?? 'No Title'),
+                      subtitle: Text(post['body'] ?? 'No Content'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.thumb_up),
+                          onPressed: () async {
+                            await apiService.likePost(post['_id']);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Liked post!")),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.comment),
+                          onPressed: () async {
+                            final comment = await showDialog<String>(
+                              context: context,
+                              builder: (context) => _CommentDialog(),
+                            );
+                            if (comment != null && comment.isNotEmpty) {
+                              await apiService.addComment(post['_id'], comment);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Comment added!")),
+                              );
+                            }
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.share), onPressed: () {  },
+                          // onPressed: () => _sharePost(post['title'], post['body']),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           );
-          },
-        ),
+        },
       ),
+    );
+  }
+}
+
+class _CommentDialog extends StatelessWidget {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Add a Comment"),
+      content: TextField(
+        controller: _controller,
+        decoration: InputDecoration(hintText: "Write your comment here..."),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, _controller.text),
+          child: Text("Submit"),
+        ),
+      ],
     );
   }
 }

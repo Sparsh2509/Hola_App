@@ -1,14 +1,17 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, avoid_print, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, unused_local_variable, avoid_print, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/models/email_model.dart';
+import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/pages/login_section/signin.dart';
+import 'package:hola_app/services/auth.dart';
 import 'package:http/http.dart';
 
 class Email extends StatefulWidget {
-  const Email({super.key});
+  const Email(this.code, {super.key});
+  final String code;
 
   @override
   State<Email> createState() => _EmailState();
@@ -16,39 +19,20 @@ class Email extends StatefulWidget {
 
 class _EmailState extends State<Email> {
   final _form = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
-  
 
-
-  Future<void> createSign(String otp, String email) async {
+  Future<void> createSign() async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
-      print("here2");
-      final EmailModel signIn = EmailModel(
-          email: _emailController.text.trim(),
-          otp: _otpController.text.trim());
-
-      try {
-        Response response = await post(
-            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/verify-email'),
-            body: {
-              'otp': otp
-            });
-        print(response.statusCode);
-
-        if (response.statusCode == 201) {
-          print(response.body.toString());
-
-          print('Email verifed successfully');
-        } else {
-          print('failed');
-        }
-      } catch (e) {
-        print(e.toString());
+      if (widget.code == _otpController.text) {
+        AuthAPI().verifyEmail(_otpController.text).then((message) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Landing()));
+        }).catchError((e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e)));
+        });
       }
-
-      
     } else {
       print("here");
     }
@@ -64,7 +48,7 @@ class _EmailState extends State<Email> {
   InputDecoration _getTextFormFieldInputDecorationWithIcon(
       Icon icon, String hintText, TextStyle hintStyle) {
     return InputDecoration(
-        prefix: icon,
+        prefixIcon: icon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: _getOutlineInputBorder(whiteColor),
@@ -110,20 +94,6 @@ class _EmailState extends State<Email> {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.05),
-                    TextFormField(
-                      style: TextStyle(color: iconColor),
-                      controller: _emailController,
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return "Enter a email ";
-                        }
-                        return null;
-                      },
-                      decoration: _getTextFormFieldInputDecorationWithIcon(
-                          Icon(Icons.email_outlined, color: iconColor),
-                          "Enter Email",
-                          TextStyle(fontSize: 15, color: whiteColor)),
-                    ),
                     SizedBox(height: screenHeight * 0.02),
                     TextFormField(
                       style: TextStyle(color: iconColor),
@@ -139,19 +109,9 @@ class _EmailState extends State<Email> {
                           "Enter OTP",
                           TextStyle(fontSize: 15, color: whiteColor)),
                     ),
-                   
-                    
                     SizedBox(height: screenHeight * 0.08),
                     GestureDetector(
-                      onTap: () {
-                        createSign(_otpController.text.toString(),
-                            _emailController.text.toString());
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignIn()),
-                              ); 
-                      },
+                      onTap: () => createSign(),
                       child: Container(
                         alignment: Alignment.center,
                         width: screenWidth * 0.9,
@@ -159,75 +119,12 @@ class _EmailState extends State<Email> {
                         decoration: BoxDecoration(
                             color: buttonColor,
                             borderRadius: BorderRadius.circular(12)),
-                        child: const Text("Get OTP",
+                        child: const Text("Verify OTP",
                             style: TextStyle(fontSize: 20, color: whiteColor)),
                       ),
                     ),
                     SizedBox(
                       height: screenHeight * 0.02,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Divider(color: whiteColor),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            "Or",
-                            style: TextStyle(color: whiteColor),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(color: whiteColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screenHeight * 0.01),
-                    Container(
-                        alignment: Alignment.center,
-                        width: screenWidth * 0.9,
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                            color: buttonColor,
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/google_icon.png",
-                              height: screenHeight * 0.02,
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.02,
-                            ),
-                            const Text("Continue with Google",
-                                style:
-                                    TextStyle(fontSize: 20, color: whiteColor)),
-                          ],
-                        )),
-                    SizedBox(
-                      height: screenHeight * 0.01,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: TextStyle(color: whiteColor),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Navigate to Sign In page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignIn()),
-                            );
-                          },
-                          child: Text("Sign In",
-                              style: TextStyle(color: iconColor)),
-                        ),
-                      ],
                     ),
                   ],
                 )),
@@ -237,4 +134,3 @@ class _EmailState extends State<Email> {
     ));
   }
 }
-

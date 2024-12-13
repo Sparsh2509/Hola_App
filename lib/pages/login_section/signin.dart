@@ -5,8 +5,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/constants/user_token.dart';
-import 'package:hola_app/models/signin_model.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/pages/login_section/password.dart';
 import 'package:http/http.dart';
@@ -29,9 +27,6 @@ class _SignInState extends State<SignIn> {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
-      final SignInModel signIn = SignInModel(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
 
       try {
         setState(() {
@@ -49,8 +44,8 @@ class _SignInState extends State<SignIn> {
 
         if (response.statusCode == 200) {
           print('Cookies from response:${response.headers['set-cookie']?.substring(0,response.headers['set-cookie']?.indexOf(';'))}');
-         token = response.headers['set-cookie']!.substring(0,response.headers['set-cookie']?.indexOf(';'));
-         print("token = $token");
+         //token = response.headers['set-cookie']!.substring(0,response.headers['set-cookie']?.indexOf(';'));
+         //print("token = $token");
          setState(() {
            isLoading = false;
          });

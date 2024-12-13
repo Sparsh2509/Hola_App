@@ -4,9 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/models/signup_model.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
+import 'package:hola_app/pages/login_section/emailverfiy.dart';
 import 'package:hola_app/pages/login_section/signin.dart';
+import 'package:hola_app/services/auth.dart';
 import 'package:http/http.dart';
 
 class Signup extends StatefulWidget {
@@ -25,50 +26,15 @@ class _SignupState extends State<Signup> {
   Future<void> createSign(String name, String password, String email) async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
-      print("here2");
-      final Sign signup = Sign(
-          name: _nameController.text.trim(),
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
-
-      try {
-        Response response = await post(
-            Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/signup'),
-            body: {
-              'name': name,
-              'email': email,
-              'password': password,
-              'userName': name
-            });
-        print("sign up " + response.statusCode.toString());
-        print("sign up = " + response.body.toString());
-
-        if (response.statusCode == 201) {
-          var data = jsonDecode(response.body.toString());
-          print("sign up " + data['user']['verificationToken']);
-          Response response_email = await post(
-              Uri.parse(
-                  'https://snapverse-6nqx.onrender.com/api/auth/verify-email'),
-              body: {
-                'code': data['user']['verificationToken'],
-              });
-          if (response_email.statusCode == 200) {
-            Navigator.pushReplacement(
+      AuthAPI().signup(name: _nameController.text, email: _emailController.text, password: _passwordController.text)
+      .then((code){
+        Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => Landing()));
-          }
-          // var data = jsonDecode(response.body.toString());
-          // print(data['id']);
-          print('Sign Up successfully');
-        } else {
-          print('failed');
-        }
-      } catch (e) {
-        print(e.toString());
-      }
-
-      // Navigator.pop(context, signup);
+                    builder: (BuildContext context) => Email(code)));
+      }).catchError((e){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e)));
+      });
     } else {
       print("here");
     }

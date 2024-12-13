@@ -31,7 +31,7 @@ class _LandingState extends State<Landing> {
       case 0: return const Landing2();
       case 1: return const Explore();
       case 2: return const Post();
-      case 3: return const PostCreated();
+      case 3: return  PostCreated();
       case 4: return const Location();
       case 5: return const Profile();
 

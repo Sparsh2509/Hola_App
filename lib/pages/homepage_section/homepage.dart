@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/homepage_list.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/constants/user_token.dart';
 
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
@@ -45,9 +44,9 @@ class _HomePageState extends State<HomePage>
         isLoading = true;
       });
       var response =
-          await http.get(Uri.parse(baseUrl + "home/posts"),
+          await http.get(Uri.parse("home/posts"),
               headers: Map<String, String>.from({
-                "cookie": token
+                //"cookie": token
               }));
       print(response.body.toString());
 
