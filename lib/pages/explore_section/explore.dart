@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/data_constants.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/explore_section/accounts.dart';
 import 'package:hola_app/pages/explore_section/community.dart';
 import 'package:hola_app/pages/explore_section/tags.dart';
 import 'package:hola_app/pages/explore_section/tops.dart';
+import 'package:hola_app/services/post_services.dart';
 import 'package:http/http.dart';
 
 class Explore extends StatefulWidget {
@@ -59,46 +61,20 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   }
 
   void _getExplorePost() async {
-    try {
-      setState(() {
-        isLoading = true;
+    if (explorePagePosts.isEmpty) {
+      PostServices().getExplorePagePosts().then((onValue) {
+        setState(() {
+          isLoading = false;
+        });
+      }).catchError((e) {
+        setState(() {
+          isLoading = false;
+        });
       });
-      Response response = await get(
-        Uri.parse('https://snapverse-6nqx.onrender.com/posts'),
-      );
-
-      // print("explore post = " + response.statusCode.toString());
-      // print("explore post = " + response.body.toString());
-
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body.toString())['posts'];
-        for (var item in data) {
-          if (item['image'] == null) {
-          } else {
-            print(item['image']['url']);
-            imageUrls.add(item['image']['url'] ??
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReiKeTsm26jLOx1RQhXGkRSPWNj2tCeMKdUA&s");
-          }
-        }
-
-        setState(() {
-          isLoading = false;
-        });
-
-        print(response.body.toString());
-
-        print('Login successfully');
-      } else {
-        print('failed');
-        setState(() {
-          isLoading = false;
-        });
-      }
-    } catch (e) {
-      print(e.toString());
-      // setState(() {
-      //   isLoading = false;
-      // });
+    } else {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -169,22 +145,22 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: isLoading
           ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [CircularProgressIndicator()],
-          )
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [CircularProgressIndicator()],
+            )
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 2 columns
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
-              itemCount: imageUrls.length, // Replace with dynamic count
+              itemCount: explorePagePosts.length, // Replace with dynamic count
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                          imageUrls[index]), // Add your photo assets
+                      image: NetworkImage(explorePagePosts[index]
+                          .imageUrl), // Add your photo assets
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(10),

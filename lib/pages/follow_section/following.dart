@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/data_constants.dart';
 import 'package:hola_app/constants/following_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
+import 'package:hola_app/services/user_services.dart';
 import 'package:hola_app/shared/following_card.dart';
 
 class Following extends StatefulWidget {
@@ -16,6 +18,21 @@ class Following extends StatefulWidget {
 }
 
 class _FollowingState extends State<Following> {
+  @override
+  void initState() {
+    _getFollowings();
+    super.initState();
+  }
+
+  _getFollowings(){
+    if(followers.isEmpty){
+
+    UserServices().getFollowings().then((onValue){}).catchError((e){
+      print("error = " + e);
+    });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,31 +56,27 @@ class _FollowingState extends State<Following> {
               ),
             ),
           ),
-          body: Expanded(
-            child: ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => DmPage()),
-                      // );
-                    },
-                    child: Row(children: [
-                      FollowingCard(
-                        imageUrl: followingList[index].imageUrl,
-                        text: followingList[index].text,
-                        subtitle: followingList[index].subtitle,
-                      ),
-                    ]),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: screenHeight * 0.0);
-                },
-                itemCount: followingList.length),
-          )),
+          body: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => DmPage()),
+                    // );
+                  },
+                  child: FollowingCard(
+                    imageUrl: followings[index].imageUrl!,
+                    text: followings[index].name,
+                    subtitle: followings[index].userName,
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(height: screenHeight * 0.0);
+              },
+              itemCount: followings.length)),
     );
   }
 }

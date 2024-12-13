@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:hola_app/constants/data_constants.dart';
+import 'package:hola_app/models/user_model.dart';
 import 'package:http/http.dart';
 
 class AuthAPI {
@@ -10,7 +12,8 @@ class AuthAPI {
       required String email,
       required String password}) async {
     try {
-      Response response = await post(Uri.parse("https://snapverse-6nqx.onrender.com/api/auth/signup"),
+      Response response = await post(
+          Uri.parse("https://snapverse-6nqx.onrender.com/api/auth/signup"),
           body: {
             'name': name,
             'email': email,
@@ -25,13 +28,12 @@ class AuthAPI {
         print(
             "sign up verification token " + data['user']['verificationToken']);
 
-            return data['user']['verificationToken'];
+        print(
+            'Cookies from response:${response.headers['set-cookie']?.substring(0, response.headers['set-cookie']?.indexOf(';'))}');
+            loggedInUser = UserModel(name: name, token: response.headers['set-cookie']!
+            .substring(0, response.headers['set-cookie']?.indexOf(';')), userName: name,id: data['user']['_id']);
 
-        // verifyEmail(data['user']['verificationToken']).then((onValue) {
-        //   return "Signup Successful";
-        // }).catchError((e) {
-        //   throw (e);
-        // });
+        return data['user']['verificationToken'];
       }
     } catch (e) {
       throw "Signup Failed";
@@ -43,7 +45,8 @@ class AuthAPI {
   Future<String> verifyEmail(String code) async {
     try {
       Response responseEmail = await post(
-          Uri.parse("https://snapverse-6nqx.onrender.com/api/auth/verify-email"),
+          Uri.parse(
+              "https://snapverse-6nqx.onrender.com/api/auth/verify-email"),
           body: {'code': code});
       if (responseEmail.statusCode == 200) {
         return "Email Verified";
@@ -52,5 +55,33 @@ class AuthAPI {
       throw "Email Verification Failed";
     }
     throw "Email Verification Failed";
+  }
+
+  Future<String> signIn(
+      {required String email, required String password}) async {
+    try {
+      Response response = await post(
+          Uri.parse('https://snapverse-6nqx.onrender.com/api/auth/login'),
+          body: {
+            'email': email,
+            'password': password,
+          });
+
+      print("login status code = " + response.statusCode.toString());
+      print("login response = " + response.body.toString());
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+        print(
+            'Cookies from response:${response.headers['set-cookie']?.substring(0, response.headers['set-cookie']?.indexOf(';'))}');
+            loggedInUser = UserModel(name: data['user']['name'], token: response.headers['set-cookie']!
+            .substring(0, response.headers['set-cookie']?.indexOf(';')), userName: data['user']['userName'],id: data['user']['_id']);
+            print("token = " + loggedInUser!.token!);
+        return "Logged in Sucessfully";
+      }
+    } catch (e) {
+      throw "Login Failed";
+    }
+    throw "Login Failed";
   }
 }

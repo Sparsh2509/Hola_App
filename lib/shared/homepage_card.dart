@@ -35,7 +35,7 @@ class HomepageCard extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage(homepageModel.image),
+                      backgroundImage: NetworkImage(homepageModel.image),
                     ),
                     SizedBox(
                       width: screenWidth * 0.02,
@@ -64,7 +64,7 @@ class HomepageCard extends StatelessWidget {
                     border: Border.all(color: iconColor),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(homepageModel.imageUrl),
+                        image: NetworkImage(homepageModel.imageUrl),
                         fit: BoxFit.cover),
                   ),
                 ),

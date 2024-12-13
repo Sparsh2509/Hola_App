@@ -4,43 +4,46 @@ import 'package:hola_app/constants/size.dart';
 
 // ignore: must_be_immutable
 class AccountsCard extends StatelessWidget {
-  AccountsCard({super.key, 
+   const AccountsCard({super.key, 
     required this.imageUrl,
     required this.text,
     required this.subtitle,
+    required this.id
   });
-  String imageUrl;
-  String text;
-  String subtitle;
+  final String imageUrl;
+  final String text;
+  final String subtitle;
+  final String id;
 
   
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          height: screenWidth * 0.15,
-          width: screenWidth * 0.15,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: CircleAvatar(
-            backgroundImage: AssetImage(imageUrl),
-          ),
+    return ListTile(
+      leading: Container(
+        padding: const EdgeInsets.all(8),
+        height: screenWidth * 0.15,
+        width: screenWidth * 0.15,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
         ),
-        title: Text(
-          text,
-          style: const TextStyle(
-              fontSize: 15, fontWeight: FontWeight.bold, color: whiteColor),
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(imageUrl),
         ),
-        subtitle: Text(
-          subtitle,
-          style: const TextStyle(fontSize: 16, color: greyColor),
-        ),
-        
       ),
+      title: Text(
+        text,
+        style: const TextStyle(
+            fontSize: 15, fontWeight: FontWeight.bold, color: whiteColor),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: const TextStyle(fontSize: 16, color: greyColor),
+      ),
+      trailing: ElevatedButton(onPressed: (){
+        
+      }, child: Text("Follow")),
+      
     ); 
   }
 }

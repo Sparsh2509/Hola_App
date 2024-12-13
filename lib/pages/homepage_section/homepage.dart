@@ -4,11 +4,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
+import 'package:hola_app/constants/data_constants.dart';
 import 'package:hola_app/constants/homepage_list.dart';
 import 'package:hola_app/constants/size.dart';
 
 import 'package:hola_app/pages/chat_section/chat.dart';
 import 'package:hola_app/pages/homepage_section/notification.dart';
+import 'package:hola_app/services/post_services.dart';
 import 'package:hola_app/shared/homepage_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,31 +41,20 @@ class _HomePageState extends State<HomePage>
   }
 
   _getHomePagePost() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-      var response =
-          await http.get(Uri.parse("home/posts"),
-              headers: Map<String, String>.from({
-                //"cookie": token
-              }));
-      print(response.body.toString());
-
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body.toString());
-
-        print(response.body.toString());
+    if (homePagePosts.isEmpty) {
+      PostServices().getHomePagePosts().then((onValue) {
         setState(() {
           isLoading = false;
         });
-
-        print('Post fetched successfully');
-      } else {
-        print('failed');
-      }
-    } catch (e) {
-      print(e.toString());
+      }).catchError((e) {
+        setState(() {
+          isLoading = false;
+        });
+      });
+    } else {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -211,18 +202,19 @@ class _HomePageState extends State<HomePage>
           )
         : ListView.separated(
             shrinkWrap: true,
-            itemCount: homeList.length,
+            itemCount: homePagePosts.length,
             padding: const EdgeInsets.all(10),
             itemBuilder: (context, index) {
               return HomepageCard(
-                homepageModel: homeList[index],
+                homepageModel: homePagePosts[index],
                 onValueChanged: () {
                   setState(() {
-                    homeList[index].isliked = !homeList[index].isliked;
-                    if (homeList[index].isliked) {
-                      homeList[index].likes++;
+                    homePagePosts[index].isliked =
+                        !homePagePosts[index].isliked;
+                    if (homePagePosts[index].isliked) {
+                      homePagePosts[index].likes++;
                     } else {
-                      homeList[index].likes--;
+                      homePagePosts[index].likes--;
                     }
                   });
                 },
