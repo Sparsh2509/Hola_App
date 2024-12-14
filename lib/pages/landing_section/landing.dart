@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/pages/explore_section/explore.dart';
 import 'package:hola_app/pages/landing_section/landing_2.dart';
-import 'package:hola_app/pages/location.dart';
+import 'package:hola_app/pages/reels_page.dart';
 import 'package:hola_app/pages/post_section/post.dart';
 import 'package:hola_app/pages/post_section/post_created.dart';
 import 'package:hola_app/pages/profile_section/profile.dart';
@@ -32,7 +32,7 @@ class _LandingState extends State<Landing> {
       case 1: return const Explore();
       case 2: return const Post();
       case 3: return  PostCreated();
-      case 4: return const Location();
+      case 4: return const ReelsPage();
       case 5: return const Profile();
 
     }
@@ -81,7 +81,7 @@ class _LandingState extends State<Landing> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.my_location_outlined,
+              Icons.pause,
               color: selectedIndex == 4 ? whiteColor :  iconColor,
             ),
             label: "",

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/data_constants.dart';
-import 'package:hola_app/constants/following_list.dart';
 import 'package:hola_app/constants/size.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
 import 'package:hola_app/services/user_services.dart';
