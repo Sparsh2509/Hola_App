@@ -15,6 +15,6 @@ class _CommunityState extends State<Community> {
       child: Text(
         "Community Page",style: TextStyle(color: whiteColor,fontSize: 15),
       ),
-    );;
+    );
   }
 }

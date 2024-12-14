@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-import 'package:hola_app/models/password_model.dart';
 import 'package:http/http.dart';
 
 class Password extends StatefulWidget {
@@ -22,9 +21,6 @@ class _PasswordState extends State<Password> {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
-      final PasswordModel signin = PasswordModel(
-        email: _emailController.text.trim(),
-      );
 
       try {
         Response response = await post(
