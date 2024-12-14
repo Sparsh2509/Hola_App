@@ -6,6 +6,7 @@ class HomepageModel{
       int likes;
       int comments;
       bool isliked;
+      String id;
 
 HomepageModel({
   required this.image,
@@ -14,7 +15,8 @@ HomepageModel({
   required this.imageUrl,
   required this.likes,
   required this.comments,
-  required this.isliked
+  required this.isliked,
+  required this.id
 
   
 });

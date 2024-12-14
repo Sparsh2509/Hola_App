@@ -96,7 +96,7 @@ class HomepageCard extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CommentScreen()));
+                                  builder: (context) => CommentScreen(postId: homepageModel.id,)));
                         },
                         icon: Icon(
                           Icons.comment,

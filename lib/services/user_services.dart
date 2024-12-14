@@ -1,7 +1,11 @@
 import 'dart:convert';
 
 import 'package:hola_app/constants/data_constants.dart';
+import 'package:hola_app/models/homepage_model.dart';
+import 'package:hola_app/models/post_model.dart';
+import 'package:hola_app/models/profile_model.dart';
 import 'package:hola_app/models/user_model.dart';
+import 'package:hola_app/pages/profile_section/profile.dart';
 import 'package:http/http.dart';
 
 class UserServices {
@@ -55,7 +59,7 @@ class UserServices {
       Response response = await get(
           Uri.parse("http://snapverse-6nqx.onrender.com/api/following/lists"),
           headers: Map<String, String>.from({"cookie": loggedInUser!.token}));
-          print("status code" + response.statusCode.toString());
+      print("status code" + response.statusCode.toString());
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
         print("followers = " + response.body.toString());
@@ -70,6 +74,39 @@ class UserServices {
       throw "Users not fetched";
     }
     throw "Users not fetched";
+  }
+
+  Future<ProfileModel> getUserData(String id) async {
+    try {
+      Response response = await get(
+          Uri.parse("https://snapverse-6nqx.onrender.com/api/show/$id"));
+      //print("^^^^^^^^^^" + response.statusCode.toString());
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+        print("data############" + response.body.toString());
+        List<String> _postsUrls = [];
+        for (var item in data['posts']) {
+          print(item.toString());
+          if (item['image'] != null) {
+            _postsUrls.add(item['image']['url']);
+          }
+        }
+        print("post length = " + _postsUrls.length.toString());
+        ProfileModel profileModel = ProfileModel(
+            coverImage: data['user']['coverImage']['url'],
+            followers: data['user']['followersCount'],
+            followings: data['user']['followingCount'],
+            name: data['user']['name'],
+            postsUrls: _postsUrls,
+            profileImage: data['user']['profileImage']['url'],
+            userName: data['user']['userName']);
+
+        return profileModel;
+      }
+    } catch (e) {
+      throw "Something went wrong";
+    }
+    throw "Something went wrong";
   }
 
   //   Future<String> getUserProfile(String id) async {

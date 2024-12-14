@@ -15,6 +15,6 @@ class _TagsState extends State<Tags> {
       child: Text(
         "Tags Page",style: TextStyle(color: whiteColor,fontSize: 15),
       ),
-    );;
+    );
   }
 }

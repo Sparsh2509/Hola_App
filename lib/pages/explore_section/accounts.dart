@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/data_constants.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/pages/profile_section/profile.dart';
 import 'package:hola_app/services/user_services.dart';
 import 'package:hola_app/shared/accounts_card.dart';
 
@@ -37,7 +38,14 @@ class _AccountsState extends State<Accounts> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Profile(
+                            userId: allUsers[index].id,
+                          )));
+            },
             child: AccountsCard(
               imageUrl: allUsers[index].imageUrl!,
               text: allUsers[index].name,

@@ -41,7 +41,7 @@ class _FollowerState extends State<Follower> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => const Profile()));
+                        builder: (BuildContext context) => Profile()));
               },
             ),
             title: const Text(

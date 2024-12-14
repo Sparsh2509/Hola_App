@@ -104,7 +104,7 @@ class PostCard extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CommentScreen()));
+                                  builder: (context) => CommentScreen(postId: "",)));
                         },
                         icon: Icon(
                           Icons.comment,

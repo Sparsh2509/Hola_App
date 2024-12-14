@@ -33,7 +33,7 @@ class _LandingState extends State<Landing> {
       case 2: return const Post();
       case 3: return  PostCreated();
       case 4: return const ReelsPage();
-      case 5: return const Profile();
+      case 5: return Profile();
 
     }
   }

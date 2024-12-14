@@ -3,20 +3,45 @@
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
+import 'package:hola_app/models/comments_model.dart';
 import 'package:hola_app/pages/landing_section/landing.dart';
+import 'package:hola_app/services/post_services.dart';
 
 class CommentScreen extends StatefulWidget {
-   const CommentScreen({Key? key}) : super(key: key);
+  const CommentScreen({super.key, required this.postId});
+
+  final String postId;
 
   @override
   State<CommentScreen> createState() => _CommentScreenState();
 }
 
 class _CommentScreenState extends State<CommentScreen> {
- final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+
+  List<CommentsModel> comments = [];
+  bool isLoading = true;
 
   @override
-  
+  void initState() {
+    _getComments();
+    super.initState();
+  }
+
+  void _getComments() {
+    PostServices().getCommentOfPost(widget.postId).then((onValue) {
+      setState(() {
+        comments = onValue;
+        isLoading =false;
+      });
+    }).catchError((e) {
+      setState(() {
+        isLoading =false;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -31,85 +56,104 @@ class _CommentScreenState extends State<CommentScreen> {
             color: whiteColor,
           ),
           onPressed: () {
-             Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (BuildContext context) => Landing()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => Landing()));
           },
         ),
       ),
-      body: Column(children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 10,
-            shrinkWrap: true,
-            // physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage(
-                    'assets/person_image.png',
-                  ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Column(children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: comments.length,
+                  shrinkWrap: true,
+                  // physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                      // leading: CircleAvatar(
+                      //   backgroundImage: AssetImage(
+                      //     'assets/person_image.png',
+                      //   ),
+                      // ),
+                      title:
+                          Text(comments[index].userName, style: TextStyle(color: whiteColor)),
+                      subtitle: Text(comments[index].comment,
+                          style: TextStyle(color: whiteColor)),
+                      // trailing: Column(
+                      //   children: [
+                      //     IconButton(
+                      //       visualDensity: VisualDensity.compact,
+                      //       iconSize: 20,
+                      //       padding: EdgeInsets.all(0),
+                      //       icon: const Icon(
+                      //         Icons.favorite_border,
+                      //         color: whiteColor,
+                      //       ),
+                      //       onPressed: () {},
+                      //     ),
+                      //     const Text('3', style: TextStyle(color: whiteColor)),
+                      //   ],
+                      // ),
+                    );
+                  },
                 ),
-                title: Text('Shab_pt', style: TextStyle(color: whiteColor)),
-                subtitle:
-                    Text('Beautiful', style: TextStyle(color: whiteColor)),
-                trailing: Column(
-                  children: [
-                    IconButton(
-                      visualDensity: VisualDensity.compact,
-                      iconSize: 20,
-                      padding: EdgeInsets.all(0),
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: whiteColor,
-                      ),
-                      onPressed: () {},
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
                     ),
-                    const Text('3', style: TextStyle(color: whiteColor)),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: screenHeight * 0.01,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.favorite,color: Colors.red,),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.emoji_emotions,color: Colors.yellow,),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.add,color: whiteColor,),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.mic,color: whiteColor,),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.send,color: whiteColor,),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        SizedBox(
-          height: screenHeight*0.01,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: TextField(
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.emoji_emotions,
+                      color: Colors.yellow,
+                    ),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.add,
+                      color: whiteColor,
+                    ),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.mic,
+                      color: whiteColor,
+                    ),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.send,
+                      color: whiteColor,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
                   controller: _searchController,
                   style: TextStyle(color: whiteColor),
                   decoration: InputDecoration(
-                  
                     hintText: "Type a Comment",
                     hintStyle: TextStyle(color: iconColor),
                     focusedBorder: OutlineInputBorder(
@@ -117,12 +161,9 @@ class _CommentScreenState extends State<CommentScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  
-                  
                 ),
-        ),
-
-      ]),
+              ),
+            ]),
 
       // bottomNavigationBar: BottomAppBar(
 
