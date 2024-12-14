@@ -186,6 +186,7 @@ class _SignInState extends State<SignIn> {
                           TextFormField(
                             style: TextStyle(color: iconColor),
                             controller: _passwordController,
+                             obscureText: true,
                             validator: (text) {
                               if (text == null || text.isEmpty) {
                                 return "Enter a password ";

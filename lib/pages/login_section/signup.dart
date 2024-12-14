@@ -138,6 +138,7 @@ class _SignupState extends State<Signup> {
                       TextFormField(
                         style: TextStyle(color: iconColor),
                         controller: _passwordController,
+                         obscureText: true,
                         validator: (text) {
                           if (text == null || text.isEmpty) {
                             return "Enter a password ";
