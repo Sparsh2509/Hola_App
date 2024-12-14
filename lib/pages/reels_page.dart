@@ -13,7 +13,7 @@ class _ReelsPageState extends State<ReelsPage> {
   final List<Map<String, dynamic>> posts = [];
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Reels Page",style: TextStyle(color: whiteColor,fontSize: 15),
       ),

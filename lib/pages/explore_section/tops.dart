@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hola_app/constants/colors.dart';
 
 class Tops extends StatefulWidget {
   const Tops({super.key});
@@ -10,6 +11,10 @@ class Tops extends StatefulWidget {
 class _TopsState extends State<Tops> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Text(
+        "Tops Page",style: TextStyle(color: whiteColor,fontSize: 15),
+      ),
+    );
   }
 }

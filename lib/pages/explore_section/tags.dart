@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hola_app/constants/colors.dart';
 
 class Tags extends StatefulWidget {
   const Tags({super.key});
@@ -10,6 +11,10 @@ class Tags extends StatefulWidget {
 class _TagsState extends State<Tags> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Text(
+        "Tags Page",style: TextStyle(color: whiteColor,fontSize: 15),
+      ),
+    );;
   }
 }

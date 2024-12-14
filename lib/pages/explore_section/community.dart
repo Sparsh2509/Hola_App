@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hola_app/constants/colors.dart';
 
 class Community extends StatefulWidget {
   const Community({super.key});
@@ -10,6 +11,10 @@ class Community extends StatefulWidget {
 class _CommunityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Center(
+      child: Text(
+        "Commuinty Page",style: TextStyle(color: whiteColor,fontSize: 15),
+      ),
+    );;
   }
 }
