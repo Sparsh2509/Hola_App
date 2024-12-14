@@ -13,7 +13,7 @@ class _CommunityState extends State<Community> {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        "Commuinty Page",style: TextStyle(color: whiteColor,fontSize: 15),
+        "Community Page",style: TextStyle(color: whiteColor,fontSize: 15),
       ),
     );;
   }

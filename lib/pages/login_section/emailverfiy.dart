@@ -19,12 +19,19 @@ class Email extends StatefulWidget {
 class _EmailState extends State<Email> {
   final _form = GlobalKey<FormState>();
   final TextEditingController _otpController = TextEditingController();
+  bool isLoading = false;
 
   Future<void> createSign() async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
+      setState(() {
+        isLoading=true;
+      });
       if (widget.code == _otpController.text) {
         AuthAPI().verifyEmail(_otpController.text).then((message) {
+          setState(() {
+            isLoading=false;
+          });
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Landing()));
         }).catchError((e) {
@@ -109,6 +116,7 @@ class _EmailState extends State<Email> {
                           TextStyle(fontSize: 15, color: whiteColor)),
                     ),
                     SizedBox(height: screenHeight * 0.08),
+                    isLoading?CircularProgressIndicator():
                     GestureDetector(
                       onTap: () => createSign(),
                       child: Container(

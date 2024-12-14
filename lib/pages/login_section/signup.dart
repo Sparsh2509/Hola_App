@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, avoid_print, non_constant_identifier_names, unused_local_variable, use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
 import 'package:hola_app/constants/colors.dart';
 import 'package:hola_app/constants/size.dart';
-
 import 'package:hola_app/pages/login_section/emailverfiy.dart';
 import 'package:hola_app/pages/login_section/signin.dart';
 import 'package:hola_app/services/auth.dart';
@@ -21,17 +19,28 @@ class _SignupState extends State<Signup> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
 
-  Future<void> createSign(String name, String password, String email) async {
+  Future<void> createSign() async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
-      AuthAPI().signup(name: _nameController.text, email: _emailController.text, password: _passwordController.text)
-      .then((code){
-        Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => Email(code)));
-      }).catchError((e){
+      setState(() {
+        isLoading = true;
+      });
+
+      AuthAPI()
+          .signup(
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text)
+          .then((code) {
+        setState(() {
+          isLoading = false;
+        });
+
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => Email(code)));
+      }).catchError((e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e)));
       });
     } else {
@@ -141,25 +150,24 @@ class _SignupState extends State<Signup> {
                             TextStyle(fontSize: 15, color: whiteColor)),
                       ),
                       SizedBox(height: screenHeight * 0.05),
-                      GestureDetector(
-                        onTap: () {
-                          createSign(
-                              _nameController.text.toString(),
-                              _passwordController.text.toString(),
-                              _emailController.text.toString());
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: screenWidth * 0.9,
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                              color: buttonColor,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: const Text("Create Account",
-                              style:
-                                  TextStyle(fontSize: 20, color: whiteColor)),
-                        ),
-                      ),
+                      isLoading
+                          ? CircularProgressIndicator()
+                          : GestureDetector(
+                              onTap: () {
+                                createSign();
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: screenWidth * 0.9,
+                                padding: const EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                    color: buttonColor,
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: const Text("Create Account",
+                                    style: TextStyle(
+                                        fontSize: 20, color: whiteColor)),
+                              ),
+                            ),
                       SizedBox(height: screenHeight * 0.01),
                       Text(
                         "By signing up, you agree to our Terms & Conditions and Privacy Policy",

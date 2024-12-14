@@ -20,18 +20,28 @@ class _SignInState extends State<SignIn> {
 
   bool isLoading = false;
 
-  Future<void> createSign(String password, String email) async {
+  Future<void> createSign() async {
     final validateStatus = _form.currentState?.validate();
     if (validateStatus!) {
       print("here2");
+      setState(() {
+        isLoading = true;
+      });
 
       AuthAPI()
           .signIn(
               email: _emailController.text, password: _passwordController.text)
           .then((onValue) {
+        setState(() {
+          isLoading = false;
+        });
+
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (BuildContext context) => Landing()));
       }).catchError((e) {
+        setState(() {
+          isLoading = false;
+        });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
           e,
@@ -210,9 +220,7 @@ class _SignInState extends State<SignIn> {
                               ? CircularProgressIndicator()
                               : GestureDetector(
                                   onTap: () {
-                                    createSign(
-                                        _passwordController.text.toString(),
-                                        _emailController.text.toString());
+                                    createSign();
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
