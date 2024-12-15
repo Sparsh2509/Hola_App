@@ -92,9 +92,35 @@ class PostServices {
         return commentsModel;
       }
     } catch (e) {
-      throw "Posts not fetched";
+      throw "Comments not fetched";
     }
-    throw "Posts not fetched";
+    throw "Comments not fetched";
+  }
+
+  Future <List<CommentsAddModel>> postComment(String postId) async{
+    print("post id = " + postId);
+    try {
+      Response response = await get(
+          Uri.parse("https://snapverse-6nqx.onrender.com/posts/$postId/comments"),
+          );
+          if (response.statusCode == 201) {
+        var data = jsonDecode(response.body.toString());
+        List<CommentsAddModel> commentsAddModel = [];
+        for (var item in data['newComment']) {
+          print(item.toString());
+          commentsAddModel.add(CommentsAddModel(comment: item['text']));
+        }
+        return commentsAddModel;
+      }
+          
+        
+
+    }
+    catch(e){
+      throw "Comments not fetched";
+
+    }
+    throw "Comments not fetched";
   }
 
   //   Future uploadFileImage(

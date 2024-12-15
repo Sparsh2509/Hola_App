@@ -17,9 +17,10 @@ class CommentScreen extends StatefulWidget {
 }
 
 class _CommentScreenState extends State<CommentScreen> {
-  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   List<CommentsModel> comments = [];
+  List<CommentsAddModel> addComment= [];
   bool isLoading = true;
 
   @override
@@ -150,16 +151,19 @@ class _CommentScreenState extends State<CommentScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: _searchController,
-                  style: TextStyle(color: whiteColor),
+                child: TextFormField(
+                  style: TextStyle(color: iconColor),
+                  controller: _textController,
                   decoration: InputDecoration(
-                    hintText: "Type a Comment",
-                    hintStyle: TextStyle(color: iconColor),
+                    hintText: "Type a message",hintStyle: TextStyle(color: whiteColor),
+                    prefixIcon: Icon(Icons.message,color: whiteColor,),
+                    suffixIcon: Icon(Icons.send,color: whiteColor,),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: iconColor)),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: whiteColor),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: iconColor)),
                   ),
                 ),
               ),
